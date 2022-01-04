@@ -1,3 +1,3 @@
 package by.godevelopment.kroksample.common
 
-const val LOG_KEY = "Krok#Log"
+const val TAG = "Krok#Log"
