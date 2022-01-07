@@ -7,8 +7,10 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import by.godevelopment.kroksample.R
 import by.godevelopment.kroksample.databinding.DetailsFragmentBinding
+import by.godevelopment.kroksample.ui.listplaces.ListPlacesFragmentArgs
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,6 +24,8 @@ class DetailsFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: DetailsViewModel by viewModels()
 
+    private val idViewArgs: DetailsFragmentArgs by navArgs()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -29,11 +33,12 @@ class DetailsFragment : Fragment() {
         _binding = DataBindingUtil.inflate(inflater, R.layout.details_fragment, container, false)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+        viewModel.header.value = "View #${idViewArgs.idView}"
         return binding.root
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onPause() {
+        super.onPause()
         _binding = null
     }
 }
