@@ -7,14 +7,14 @@
     <data>
         <variable
             name="viewModel"
-            type="by.godevelopment.kroksample.ui.deatails.DetailsViewModel" />
+            type="by.godevelopment.kroksample.ui.details.DetailsViewModel" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.deatails.DetailsFragment"
+        tools:context=".ui.details.DetailsFragment"
         android:padding="5dp"
         >
 
@@ -42,6 +42,7 @@
             app:layout_constraintTop_toBottomOf="@+id/header"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:isVisible="@{viewModel.showPictures}"
             />
 
         <ImageButton
@@ -139,6 +140,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:isVisible="@{viewModel.showProgressBar}"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

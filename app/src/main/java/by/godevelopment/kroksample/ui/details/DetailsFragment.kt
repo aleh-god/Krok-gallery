@@ -1,4 +1,4 @@
-package by.godevelopment.kroksample.ui.deatails
+package by.godevelopment.kroksample.ui.details
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +10,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import by.godevelopment.kroksample.R
 import by.godevelopment.kroksample.databinding.DetailsFragmentBinding
-import by.godevelopment.kroksample.ui.listplaces.ListPlacesFragmentArgs
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -33,7 +32,7 @@ class DetailsFragment : Fragment() {
         _binding = DataBindingUtil.inflate(inflater, R.layout.details_fragment, container, false)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
-        viewModel.header.value = "View #${idViewArgs.idView}"
+        viewModel.navArgs.value = idViewArgs.idView
         return binding.root
     }
 

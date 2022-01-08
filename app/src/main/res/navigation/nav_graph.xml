@@ -53,7 +53,7 @@
 
     <fragment
         android:id="@+id/detailsPoint"
-        android:name="by.godevelopment.kroksample.ui.deatails.DetailsFragment"
+        android:name="by.godevelopment.kroksample.ui.details.DetailsFragment"
         android:label="Details"
         tools:layout="@layout/details_fragment"
         >

@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">KrokSample</string>
+    <string name="brest_region_const">Brest region</string>
+    <string name="vitebsk_region_const">Vitebsk region</string>
+    <string name="gomel_region_const">Gomel region</string>
+    <string name="grodno_region_const">Grodno region</string>
+    <string name="minsk_region_const">Minsk region</string>
+    <string name="mogilev_region_const">Mogilev region</string>
 </resources>

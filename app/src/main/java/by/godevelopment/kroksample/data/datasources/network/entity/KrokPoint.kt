@@ -3,9 +3,9 @@ package by.godevelopment.kroksample.data.datasources.network.entity
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class KrokPointInstance(
-    val city: City,
+data class KrokPoint(
     val id: Int,
+    val city: City,
     val lat: Double,
     val lng: Double,
     val point_images: List<PointImage>,

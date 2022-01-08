@@ -12,7 +12,6 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/list_Regions_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.listregions.ListRegionsFragment"

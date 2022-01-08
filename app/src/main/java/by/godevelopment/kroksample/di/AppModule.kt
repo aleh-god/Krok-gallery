@@ -1,6 +1,8 @@
 package by.godevelopment.kroksample.di
 
+import android.content.Context
 import by.godevelopment.kroksample.data.datasources.network.KrokApi
+import by.godevelopment.kroksample.data.datasources.network.KrokRemoteDataSource
 import by.godevelopment.kroksample.data.repositories.NetworkRepository
 import dagger.Module
 import dagger.Provides
@@ -55,8 +57,14 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideNetworkRepository(krokApi: KrokApi,
-                                 coroutineDispatcher: CoroutineDispatcher
-    ): NetworkRepository = NetworkRepository(krokApi, coroutineDispatcher)
+    fun provideKrokRemoteDataSource(
+        krokApi: KrokApi
+    ): KrokRemoteDataSource = KrokRemoteDataSource(krokApi)
 
+    @Provides
+    @Singleton
+    fun provideNetworkRepository(
+        krokRemoteDataSource: KrokRemoteDataSource,
+        ioDispatcher: CoroutineDispatcher
+    ): NetworkRepository = NetworkRepository(krokRemoteDataSource, ioDispatcher)
 }
