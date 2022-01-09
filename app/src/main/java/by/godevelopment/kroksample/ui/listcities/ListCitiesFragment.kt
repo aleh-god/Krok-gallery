@@ -20,9 +20,11 @@ import by.godevelopment.kroksample.databinding.ListCitiesFragmentBinding
 import by.godevelopment.kroksample.domain.adapters.KrokAdapter
 import by.godevelopment.kroksample.domain.model.ListItemModel
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class ListCitiesFragment : Fragment() {
 
     companion object {
@@ -34,13 +36,13 @@ class ListCitiesFragment : Fragment() {
     private val viewModel: ListCitiesViewModel by viewModels()
 
     private val onClickNav: (Int) -> Unit = { int ->
-        Log.e(TAG, "findNavController :  $int")
+        Log.i(TAG, "ListCitiesFragment : findNavController :  $int")
         findNavController().navigate(
             ListCitiesFragmentDirections.actionListCitiesPointToListPlacesPoint(int)
         )
     }
 
-    private val idCityArgs: ListCitiesFragmentArgs by navArgs()
+    private val idRegionArgs: ListCitiesFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,7 +52,7 @@ class ListCitiesFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
         viewModel.onClickNav.value = onClickNav
-        viewModel.header.value = "City: #${idCityArgs.idCity}"
+        viewModel.idKey.value = idRegionArgs.idKey
 
         setupUI()
 
@@ -68,18 +70,22 @@ class ListCitiesFragment : Fragment() {
     private fun setupUI() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                Log.i(TAG, "Fragment : Lifecycle.State.STARTED")
+                Log.i(TAG, "ListCitiesFragment : Lifecycle.State.STARTED")
                 viewModel.out
                     .onStart {
+                        Log.i(TAG, "ListCitiesFragment : .onStart")
                         binding.progressDownload.visibility = View.VISIBLE
                     }
                     .onEach {
+                        Log.i(TAG, "ListCitiesFragment : .onEach")
                         setupAdapter(it)
                     }
                     .onCompletion {
+                        Log.i(TAG, "ListCitiesFragment : .onCompletion")
                         binding.progressDownload.visibility = View.INVISIBLE // View.GONE
                     }
                     .catch {
+                        Log.i(TAG, "ListCitiesFragment : .catch")
                         Snackbar.make(binding.root, "Loading data failed!", Snackbar.LENGTH_LONG)
                             .setAction("Reload", null) // View.OnClickListener
                             .show()
@@ -88,9 +94,8 @@ class ListCitiesFragment : Fragment() {
         }
     }
 
-    override fun onPause() {
-        super.onPause()
+    override fun onDestroy() {
         _binding = null
+        super.onDestroy()
     }
-
 }

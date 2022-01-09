@@ -42,7 +42,7 @@ class ListPlacesFragment : Fragment() {
         )
     }
 
-    private val idPlaceArgs: ListPlacesFragmentArgs by navArgs()
+    private val idCityArgs: ListPlacesFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,7 +52,7 @@ class ListPlacesFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
         viewModel.onClickNav.value = onClickNav
-        viewModel.header.value = "Place: #${idPlaceArgs.idPlace}"
+        viewModel.idKey.value = idCityArgs.idKey
 
         setupUI()
 
@@ -90,8 +90,8 @@ class ListPlacesFragment : Fragment() {
         }
     }
 
-    override fun onPause() {
-        super.onPause()
+    override fun onDestroy() {
         _binding = null
+        super.onDestroy()
     }
 }

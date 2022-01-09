@@ -26,6 +26,9 @@ interface KrokApi {
  https://krokapp.com/view_place/{3}/ Брест лист
  https://krokapp.com/view/{7}/ Аллея литературных фонарей
 
+ kropka rest
+ https://krokapp.by/api/rest/points/29/
+
  Запрасіць спіс гарадоў - https://krokapp.by/api/get_cities/11/
  Запрасіць спіс кропак - http://krokapp.by/api/get_points/11/
  Запрасіць спіс моў - https://krokapp.by/api/get_languages

@@ -19,7 +19,7 @@
             android:id="@+id/action_listPlacesPoint_to_detailsPoint"
             app:destination="@id/detailsPoint" />
         <argument
-            android:name="id_place"
+            android:name="id_key"
             app:argType="integer" />
     </fragment>
 
@@ -36,7 +36,7 @@
             android:id="@+id/action_listCitiesPoint_to_listPlacesPoint"
             app:destination="@id/listPlacesPoint" />
         <argument
-            android:name="id_city"
+            android:name="id_key"
             app:argType="integer" />
     </fragment>
 
@@ -61,7 +61,7 @@
             android:id="@+id/action_detailsPoint_to_listPlacesPoint"
             app:destination="@id/listPlacesPoint" />
         <argument
-            android:name="id_view"
+            android:name="id_key"
             app:argType="integer" />
     </fragment>
 </navigation>

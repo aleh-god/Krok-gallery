@@ -1,11 +1,13 @@
 package by.godevelopment.kroksample.domain.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import by.godevelopment.kroksample.R
+import by.godevelopment.kroksample.common.TAG
 import by.godevelopment.kroksample.databinding.ListItemBinding
 import by.godevelopment.kroksample.domain.model.ListItemModel
 import com.bumptech.glide.Glide
@@ -26,6 +28,7 @@ class KrokAdapter : RecyclerView.Adapter<KrokAdapter.KrokViewHolder>() {
     }
 
     private val differ = AsyncListDiffer(this, diffCallback)
+
     var listItemModels: List<ListItemModel>
         get() = differ.currentList
         set(value) { differ.submitList(value) }
@@ -41,8 +44,8 @@ class KrokAdapter : RecyclerView.Adapter<KrokAdapter.KrokViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: KrokViewHolder, position: Int) {
+        val listItemModel = listItemModels[position]
         holder.binding.apply {
-            val listItemModel = listItemModels[position]
             Glide.with(root)
                 .load(listItemModel.pictures)
                 .centerCrop()
@@ -52,9 +55,11 @@ class KrokAdapter : RecyclerView.Adapter<KrokAdapter.KrokViewHolder>() {
                 .into(itemImage)
 
             itemText.text = listItemModel.text
+            Log.i(TAG, "onBindViewHolder: itemText.text = ${listItemModel.text}")
 
             root.setOnClickListener {
-                listItemModel.onClickNav.invoke(position)
+                Log.i(TAG, "onBindViewHolder: id = ${listItemModel.keyId}")
+                listItemModel.onClickNav.invoke(listItemModel.keyId)
             }
             // executePendingBindings()
         }

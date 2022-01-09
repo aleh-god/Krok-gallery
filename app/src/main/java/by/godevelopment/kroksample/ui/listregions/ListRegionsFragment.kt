@@ -35,7 +35,7 @@ class ListRegionsFragment : Fragment() {
     private val viewModel: ListRegionsViewModel by viewModels()
 
     private val onClickNav: (Int) -> Unit = { int ->
-        Log.e(TAG, "ListRegionsFragment : findNavController :  $int")
+        Log.i(TAG, "ListRegionsFragment : findNavController :  $int")
         findNavController().navigate(
             ListRegionsFragmentDirections.actionListRegionsPointToListCitiesPoint(int)
         )
@@ -75,23 +75,24 @@ class ListRegionsFragment : Fragment() {
                     .onEach {
                         Log.i(TAG, "ListRegionsFragment : .onEach")
                         setupAdapter(it)
+                        binding.progressDownload.visibility = View.INVISIBLE // View.GONE
                     }
                     .onCompletion {
                         Log.i(TAG, "ListRegionsFragment : .onCompletion")
-                        binding.progressDownload.visibility = View.INVISIBLE // View.GONE
                     }
                     .catch {
                         Log.i(TAG, "ListRegionsFragment : .catch")
                         Snackbar.make(binding.root, "Loading data failed!", Snackbar.LENGTH_LONG)
-                            .setAction("Reload", null) // View.OnClickListener
+                             .setAction("Reload", null) // View.OnClickListener
                             .show()
                     }.collect()
             }
         }
     }
 
-    override fun onPause() {
-        super.onPause()
+    override fun onDestroy() {
+        Log.i(TAG, "ListRegionsFragment : onDestroy()")
         _binding = null
+        super.onDestroy()
     }
 }

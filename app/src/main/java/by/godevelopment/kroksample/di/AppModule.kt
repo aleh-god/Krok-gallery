@@ -55,16 +55,16 @@ object AppModule {
     @Singleton
     fun provideKrokApi(retrofit: Retrofit) = retrofit.create(KrokApi::class.java)
 
-    @Provides
-    @Singleton
-    fun provideKrokRemoteDataSource(
-        krokApi: KrokApi
-    ): KrokRemoteDataSource = KrokRemoteDataSource(krokApi)
+//    @Provides
+//    @Singleton
+//    fun provideKrokRemoteDataSource(
+//        krokApi: KrokApi
+//    ): KrokRemoteDataSource = KrokRemoteDataSource(krokApi)
 
-    @Provides
-    @Singleton
-    fun provideNetworkRepository(
-        krokRemoteDataSource: KrokRemoteDataSource,
-        ioDispatcher: CoroutineDispatcher
-    ): NetworkRepository = NetworkRepository(krokRemoteDataSource, ioDispatcher)
+//    @Provides
+//    @Singleton
+//    fun provideNetworkRepository(
+//        krokRemoteDataSource: KrokRemoteDataSource,
+//        ioDispatcher: CoroutineDispatcher
+//    ): NetworkRepository = NetworkRepository(krokRemoteDataSource, ioDispatcher)
 }

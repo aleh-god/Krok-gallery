@@ -41,7 +41,7 @@ class DetailsViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            Log.e(TAG, "DetailsViewModel: init")
+            Log.i(TAG, "DetailsViewModel: init")
             navArgs.flatMapLatest {
                 getViewConvertToModelUseCase(it)
             }
