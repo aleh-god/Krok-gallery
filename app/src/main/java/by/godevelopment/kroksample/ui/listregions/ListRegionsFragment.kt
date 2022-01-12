@@ -79,6 +79,7 @@ class ListRegionsFragment : Fragment() {
                     }
                     .onCompletion {
                         Log.i(TAG, "ListRegionsFragment : .onCompletion")
+
                     }
                     .catch {
                         Log.i(TAG, "ListRegionsFragment : .catch")

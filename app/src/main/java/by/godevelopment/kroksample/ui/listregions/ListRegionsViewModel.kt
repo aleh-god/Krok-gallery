@@ -21,5 +21,8 @@ class ListRegionsViewModel @Inject constructor(
     val out = onClickNav.flatMapLatest {
         Log.i(TAG, "ListRegionsViewModel: onClickNav.flatMapLatest")
         getRegionListUseCase.execute(it)
-    }
+    }.asLiveDataFlow()
+
+    private fun <T> Flow<T>.asLiveDataFlow() =
+        shareIn(viewModelScope, SharingStarted.Eagerly, replay = 1)
 }
