@@ -53,9 +53,10 @@ class DetailsViewModel @Inject constructor(
                         header.value = data.name ?: "Null"
                         headerText.value = data.name ?: "Null"
                         text.value = data.text ?: "Null"
+
+                        showProgressBar.value = false
                     }
                     .onCompletion {
-                        showProgressBar.value = false
                     }
                     .catch {
                         header.value = "Error!"
@@ -64,3 +65,9 @@ class DetailsViewModel @Inject constructor(
         }
     }
 }
+
+// textView.text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//    Html.fromHtml(html, Html.FROM_HTML_MODE_COMPACT)
+//} else {
+//    Html.fromHtml(html)
+//}

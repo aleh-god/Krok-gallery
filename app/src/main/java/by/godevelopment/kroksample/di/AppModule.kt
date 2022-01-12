@@ -3,12 +3,15 @@ package by.godevelopment.kroksample.di
 import android.content.Context
 import by.godevelopment.kroksample.data.datasources.network.KrokApi
 import by.godevelopment.kroksample.data.datasources.network.KrokRemoteDataSource
+import by.godevelopment.kroksample.data.datasources.preferences.KrokPreferences
 import by.godevelopment.kroksample.data.repositories.NetworkRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -55,16 +58,24 @@ object AppModule {
     @Singleton
     fun provideKrokApi(retrofit: Retrofit) = retrofit.create(KrokApi::class.java)
 
-//    @Provides
-//    @Singleton
-//    fun provideKrokRemoteDataSource(
-//        krokApi: KrokApi
-//    ): KrokRemoteDataSource = KrokRemoteDataSource(krokApi)
+    @Provides
+    @Singleton
+    fun provideKrokRemoteDataSource(
+        krokApi: KrokApi,
+        coroutineDispatcher: CoroutineDispatcher
+    ): KrokRemoteDataSource = KrokRemoteDataSource(krokApi, coroutineDispatcher)
 
-//    @Provides
-//    @Singleton
-//    fun provideNetworkRepository(
-//        krokRemoteDataSource: KrokRemoteDataSource,
-//        ioDispatcher: CoroutineDispatcher
-//    ): NetworkRepository = NetworkRepository(krokRemoteDataSource, ioDispatcher)
+    @Provides
+    @Singleton
+    fun provideKrokPreferences(
+        @ApplicationContext appContext: Context,
+        coroutineScope: CoroutineScope
+    ): KrokPreferences = KrokPreferences(appContext, coroutineScope)
+
+    @Provides
+    @Singleton
+    fun provideNetworkRepository(
+        krokRemoteDataSource: KrokRemoteDataSource,
+        krokPreferences: KrokPreferences
+    ): NetworkRepository = NetworkRepository(krokRemoteDataSource, krokPreferences)
 }

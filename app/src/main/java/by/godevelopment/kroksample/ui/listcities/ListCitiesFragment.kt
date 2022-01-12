@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -52,6 +53,7 @@ class ListCitiesFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
         viewModel.onClickNav.value = onClickNav
+        Log.i(TAG, "ListCitiesFragment onCreateView: idKey = ${idRegionArgs.idKey}")
         viewModel.idKey.value = idRegionArgs.idKey
 
         setupUI()
@@ -79,10 +81,11 @@ class ListCitiesFragment : Fragment() {
                     .onEach {
                         Log.i(TAG, "ListCitiesFragment : .onEach")
                         setupAdapter(it)
+                        binding.progressDownload.visibility = View.INVISIBLE // View.GONE
                     }
                     .onCompletion {
                         Log.i(TAG, "ListCitiesFragment : .onCompletion")
-                        binding.progressDownload.visibility = View.INVISIBLE // View.GONE
+
                     }
                     .catch {
                         Log.i(TAG, "ListCitiesFragment : .catch")

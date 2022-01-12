@@ -1,6 +1,7 @@
 package by.godevelopment.kroksample.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.SearchView
@@ -16,6 +17,7 @@ import by.godevelopment.kroksample.R
 import by.godevelopment.kroksample.common.LANG_BY_KEY
 import by.godevelopment.kroksample.common.LANG_ENG_KEY
 import by.godevelopment.kroksample.common.LANG_RU_KEY
+import by.godevelopment.kroksample.common.TAG
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -41,14 +43,17 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.lang_eng -> {
+            Log.i(TAG, "onOptionsItemSelected: ENG_KEY")
             mainViewModel.setLangPreference(LANG_ENG_KEY)
             true
         }
         R.id.lang_by -> {
+            Log.i(TAG, "onOptionsItemSelected: BY_KEY")
             mainViewModel.setLangPreference(LANG_BY_KEY)
             true
         }
         R.id.lang_ru -> {
+            Log.i(TAG, "onOptionsItemSelected: RU_KEY")
             mainViewModel.setLangPreference(LANG_RU_KEY)
             true
         }

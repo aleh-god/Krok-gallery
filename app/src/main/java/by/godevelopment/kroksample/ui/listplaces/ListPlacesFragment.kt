@@ -77,9 +77,10 @@ class ListPlacesFragment : Fragment() {
                     }
                     .onEach {
                         setupAdapter(it)
+                        binding.progressDownload.visibility = View.INVISIBLE // View.GONE
                     }
                     .onCompletion {
-                        binding.progressDownload.visibility = View.INVISIBLE // View.GONE
+
                     }
                     .catch {
                         Snackbar.make(binding.root, "Loading data failed!", Snackbar.LENGTH_LONG)

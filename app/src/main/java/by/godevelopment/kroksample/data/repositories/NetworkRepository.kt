@@ -1,42 +1,35 @@
 package by.godevelopment.kroksample.data.repositories
 
+import android.util.Log
+import by.godevelopment.kroksample.common.TAG
 import by.godevelopment.kroksample.data.datasources.network.KrokRemoteDataSource
 import by.godevelopment.kroksample.data.datasources.network.entity.KrokCity
 import by.godevelopment.kroksample.data.datasources.network.entity.KrokView
 import by.godevelopment.kroksample.data.datasources.preferences.KrokPreferences
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
 class NetworkRepository @Inject constructor(
     private val krokRemoteDataSource: KrokRemoteDataSource,
-    private val krokPreferences: KrokPreferences,
-    private val ioDispatcher: CoroutineDispatcher
+    private val krokPreferences: KrokPreferences
     ) {
+    fun getAllCities(): Flow<List<KrokCity>> = combine(
+        krokRemoteDataSource.getAllCities,
+        krokPreferences.stateSharedPreferences
+    ) { list: List<KrokCity>, langId ->
+        Log.i(TAG, "getAllCities: list - ${list.size} lang = $langId")
+        list.filter {
+            it.lang == langId
+        }
+    }
 
-    fun getAllCities(): Flow<List<KrokCity>> =
-        krokRemoteDataSource.getAllCities
-            .map { list ->
-                val langId = krokPreferences.getCurrentLanguage()
+    fun getAllViews(): Flow<List<KrokView>> = combine(
+        krokRemoteDataSource.getAllViews,
+        krokPreferences.stateSharedPreferences
+    ) { list: List<KrokView>, langId ->
+                Log.i(TAG, "getAllCities: list - ${list.size} lang = $langId")
                 list.filter {
                     it.lang == langId
                 }
             }
-            .flowOn(ioDispatcher)
-
-    fun getAllViews(): Flow<List<KrokView>> =
-        krokRemoteDataSource.getAllViews
-            .map { list ->
-                val langId = krokPreferences.getCurrentLanguage()
-                list.filter {
-                    it.lang == langId
-                }
-            }
-            .flowOn(ioDispatcher)
 }
-
-//             .onEach { news -> // Executes on the default dispatcher
-//                saveInCache(news)
-//            }
