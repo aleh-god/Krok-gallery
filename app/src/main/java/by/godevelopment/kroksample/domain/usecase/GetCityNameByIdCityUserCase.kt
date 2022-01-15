@@ -13,6 +13,6 @@ class GetCityNameByIdCityUserCase @Inject constructor(
             .map { list ->
                 list.first {
                     it.id == params
-                }.name ?: "Null city"
+                }.name ?: "No information"
             }
 }

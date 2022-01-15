@@ -11,4 +11,5 @@
     <string name="lang_by">Спіс па беларуску</string>
     <string name="lang_ru">Список на русском</string>
     <string name="action_search">Найти кропку</string>
+    <string name="error_loading">Loading data failed!</string>
 </resources>

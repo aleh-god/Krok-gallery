@@ -1,46 +1,56 @@
 package by.godevelopment.kroksample.domain.helpers
 
-import android.content.Context
 import android.media.AudioAttributes
 import android.media.MediaPlayer
 import android.util.Log
 import by.godevelopment.kroksample.common.TAG
-import by.godevelopment.kroksample.domain.model.MediaItem
 import by.godevelopment.kroksample.domain.model.MediaState
 import javax.inject.Inject
 
 class MediaHelper @Inject constructor(
-    private val context: Context
-    ) {
-
-    private var mediaState = MediaState.NULL
+) {
+    var mediaState = MediaState.NULL
+        private set
     private var mediaPlayer: MediaPlayer? = null
+    private var currentTrackUri: String? = null
 
-    private fun setMediaPlayer(mediaItem: MediaItem) {
-        mediaPlayer = MediaPlayer().apply {
-            setAudioAttributes(
-                AudioAttributes.Builder()
-                    .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
-                    .setUsage(AudioAttributes.USAGE_MEDIA)
-                    .build()
-            )
-            setDataSource(mediaItem.trackUri)
-            prepare()
+    fun setMediaPlayer(trackUri: String?) {
+        Log.i(TAG, "setMediaPlayer: $trackUri")
+        trackUri?.let {
+            currentTrackUri = it
+            mediaPlayer = MediaPlayer().apply {
+                setAudioAttributes(
+                    AudioAttributes.Builder()
+                        .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                        .setUsage(AudioAttributes.USAGE_MEDIA)
+                        .build()
+                )
+                setDataSource(currentTrackUri)
+                prepare()
+            }
+            mediaState = MediaState.STOP
         }
-        mediaState = MediaState.STOP
     }
 
     fun startMusic() {
-        Log.i(TAG, "mediaPlayerHolder: startMusic() = $mediaState")
-        // if (mediaState != MediaState.PAUSE) setMediaPlayer(getCurrentMusicItem())
-        mediaPlayer?.start()
-        mediaState = MediaState.PLAY
+        Log.i(TAG, "mediaPlayerHolder: startMusic() = $currentTrackUri")
+        currentTrackUri?.let {
+            Log.i(TAG, "mediaPlayerHolder: startMusic() mediaState = $mediaState")
+            if (mediaState != MediaState.PAUSE) setMediaPlayer(currentTrackUri)
+            mediaPlayer?.let {
+                Log.i(TAG, "mediaPlayerHolder: startMusic() it.start()")
+                it.start()
+                mediaState = MediaState.PLAY
+            }
+        }
     }
 
     fun pauseMusic() {
         Log.i(TAG, "mediaPlayerHolder: pauseMusic()")
-        mediaPlayer?.pause()
-        mediaState = MediaState.PAUSE
+        mediaPlayer?.let {
+            it.pause()
+            mediaState = MediaState.PAUSE
+        }
     }
 
     fun stopMusic() {
@@ -54,18 +64,30 @@ class MediaHelper @Inject constructor(
         }
     }
 
-    fun getCurrentSecondsMedia(): Int {
-        return mediaPlayer?.currentPosition ?: 0
+    fun getCurrentSecondsMedia(): String {
+        return mediaPlayer?. let {
+            timeInString(it.currentPosition)
+        } ?: "00:00"
     }
 
-    fun getMaxSecondsMedia(): Int {
+    fun getMaxSecondsMedia(): String {
         Log.i(TAG, "MusicService: getMaxSecondsMedia()")
-        return mediaPlayer?.duration ?: 0
+        return mediaPlayer?. let {
+            timeInString(it.duration)
+        } ?: "00:00"
     }
 
     fun setProgressPlayingMedia(progress: Int) {
         Log.i(TAG, "MusicService: setProgressPlayingMedia()")
         mediaPlayer?.seekTo(progress * SECOND)
+    }
+
+    private fun timeInString(seconds: Int): String {
+        return String.format(
+            "%02d:%02d",
+            (seconds / 3600 * 60 + ((seconds % 3600) / 60)),
+            (seconds % 60)
+        )
     }
 
     companion object {

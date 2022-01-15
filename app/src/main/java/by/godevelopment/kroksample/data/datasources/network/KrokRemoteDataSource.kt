@@ -17,14 +17,14 @@ class KrokRemoteDataSource @Inject constructor(
 ) {
     val getAllCities: Flow<List<KrokCity>> = flow {
         Log.i(TAG, "KrokRemoteDataSource - getAllCities: start")
-        val response = krokApi.getAllCities()
-        if (response.isSuccessful && response.body() != null) {
-            emit(response.body()!!)
-        } else throw InternetException()
+            val response = krokApi.getAllCities()
+            if (response.isSuccessful && response.body() != null) {
+                emit(response.body()!!)
+            } else throw InternetException()
     }.flowOn(ioDispatcher)
 
     val getAllViews: Flow<List<KrokView>> = flow {
-        Log.i(TAG, "KrokRemoteDataSource - getAllCities: start")
+        Log.i(TAG, "KrokRemoteDataSource - getAllViews: start")
         val response = krokApi.getAllViews()
         if (response.isSuccessful && response.body() != null) {
             emit(response.body()!!)

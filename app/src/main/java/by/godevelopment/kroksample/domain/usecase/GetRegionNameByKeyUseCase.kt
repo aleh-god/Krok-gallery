@@ -13,6 +13,6 @@ class GetRegionNameByKeyUseCase @Inject constructor(
         return Region.getRegionNameById(params)?.let { reg ->
             Log.i(TAG, "GetRegionNameByKeyUseCase invoke: $reg")
             stringHelper.getString(reg.text)
-        } ?: "Null"
+        } ?: "No information"
     }
 }

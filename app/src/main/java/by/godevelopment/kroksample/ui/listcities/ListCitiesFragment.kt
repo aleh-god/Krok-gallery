@@ -89,9 +89,10 @@ class ListCitiesFragment : Fragment() {
                     }
                     .catch {
                         Log.i(TAG, "ListCitiesFragment : .catch")
-                        Snackbar.make(binding.root, "Loading data failed!", Snackbar.LENGTH_LONG)
+                        Snackbar.make(binding.root, context?.getString(R.string.error_loading)!!, Snackbar.LENGTH_LONG)
                             .setAction("Reload", null) // View.OnClickListener
                             .show()
+                        binding.progressDownload.visibility = View.INVISIBLE // View.GONE
                     }.collect()
             }
         }

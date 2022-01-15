@@ -36,7 +36,7 @@ class ListPlacesFragment : Fragment() {
     private val viewModel: ListPlacesViewModel by viewModels()
 
     private val onClickNav: (Int) -> Unit = { int ->
-        Log.e(TAG, "findNavController :  $int")
+        Log.i(TAG, "findNavController :  $int")
         findNavController().navigate(
             ListPlacesFragmentDirections.actionListPlacesPointToDetailsPoint(int)
         )
@@ -86,6 +86,7 @@ class ListPlacesFragment : Fragment() {
                         Snackbar.make(binding.root, "Loading data failed!", Snackbar.LENGTH_LONG)
                             .setAction("Reload", null) // View.OnClickListener
                             .show()
+                        binding.progressDownload.visibility = View.INVISIBLE // View.GONE
                     }.collect()
             }
         }

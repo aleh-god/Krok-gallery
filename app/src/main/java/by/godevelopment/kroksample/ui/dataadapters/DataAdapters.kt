@@ -18,11 +18,13 @@ fun setIsVisible(view: View, isVisible: Boolean) {
 
 @BindingAdapter("imageUrl")
 fun loadImage(view: ImageView, url: String?) {
-    Glide.with(view)
-        .load(url)
-        .centerCrop()
-        .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-        .error(R.drawable.image_not_loaded)
-        .placeholder(R.drawable.image)
-        .into(view)
+    if (!url.isNullOrEmpty()) {
+        Glide.with(view.context)
+            .load(url)
+            .centerCrop()
+            .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+            .error(R.drawable.image_not_loaded)
+            .placeholder(R.drawable.image)
+            .into(view)
+    }
 }

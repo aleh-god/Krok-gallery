@@ -17,7 +17,7 @@ class NetworkRepository @Inject constructor(
         krokRemoteDataSource.getAllCities,
         krokPreferences.stateSharedPreferences
     ) { list: List<KrokCity>, langId ->
-        Log.i(TAG, "getAllCities: list - ${list.size} lang = $langId")
+        Log.i(TAG, "NetworkRepository getAllCities: list - ${list.size} lang = $langId")
         list.filter {
             it.lang == langId
         }
@@ -27,7 +27,7 @@ class NetworkRepository @Inject constructor(
         krokRemoteDataSource.getAllViews,
         krokPreferences.stateSharedPreferences
     ) { list: List<KrokView>, langId ->
-                Log.i(TAG, "getAllCities: list - ${list.size} lang = $langId")
+                Log.i(TAG, "NetworkRepository getAllViews: list - ${list.size} lang = $langId")
                 list.filter {
                     it.lang == langId
                 }

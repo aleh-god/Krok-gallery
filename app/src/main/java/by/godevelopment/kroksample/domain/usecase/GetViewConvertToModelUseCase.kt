@@ -15,29 +15,4 @@ class GetViewConvertToModelUseCase @Inject constructor(
             it.id == id     // Throws: NoSuchElementException - if no such element is found
         }
     }
-
-
-
-
-//        flow {
-//        emit(networkRepository.getView(id))
-//    }.map {
-//        when(it) {
-//            is Result.Success -> {
-//                val data = it.data
-//                val model = DetailsModel(
-//                    header = it.data.name,
-//                    headerText = it.data.logo,
-//                    text = it.data.text,
-//                    sound = it.data.sound,
-//                    pictures = it.data.photo
-//                )
-//                Result.Success(model)
-//            }
-//            is Result.Error -> {
-//                val message = it.message
-//                Result.Error(message)
-//            }
-//        }
-//    }
 }
