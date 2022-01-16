@@ -15,10 +15,11 @@ class GetListCitiesByIdRegionUseCase @Inject constructor(
     operator fun invoke(param: Int, onClick: (Int) -> Unit): Flow<List<ListItemModel>> =
         networkRepository.getAllCities()
             .map { list ->
+                val region = getRegionNameByKeyUseCase.run(param)
                 Log.i(TAG, "GetListCitiesByIdRegionUseCase invoke: $param")
                     list
                         .filter {
-                            it.region == getRegionNameByKeyUseCase(param)
+                            it.region == region
                         }
                         .map { city ->
                             ListItemModel(

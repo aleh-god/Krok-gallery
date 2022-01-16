@@ -5,6 +5,7 @@ import android.media.MediaPlayer
 import android.util.Log
 import by.godevelopment.kroksample.common.TAG
 import by.godevelopment.kroksample.domain.model.MediaState
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class MediaHelper @Inject constructor(
@@ -64,30 +65,13 @@ class MediaHelper @Inject constructor(
         }
     }
 
-    fun getCurrentSecondsMedia(): String {
-        return mediaPlayer?. let {
-            timeInString(it.currentPosition)
-        } ?: "00:00"
+    fun getCurrentPositionMedia(): Int {
+        return mediaPlayer?.currentPosition ?: 0
     }
 
-    fun getMaxSecondsMedia(): String {
+    fun getDurationMedia(): Int {
         Log.i(TAG, "MusicService: getMaxSecondsMedia()")
-        return mediaPlayer?. let {
-            timeInString(it.duration)
-        } ?: "00:00"
-    }
-
-    fun setProgressPlayingMedia(progress: Int) {
-        Log.i(TAG, "MusicService: setProgressPlayingMedia()")
-        mediaPlayer?.seekTo(progress * SECOND)
-    }
-
-    private fun timeInString(seconds: Int): String {
-        return String.format(
-            "%02d:%02d",
-            (seconds / 3600 * 60 + ((seconds % 3600) / 60)),
-            (seconds % 60)
-        )
+        return mediaPlayer?.duration ?: 0
     }
 
     companion object {

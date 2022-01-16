@@ -1,15 +1,13 @@
 package by.godevelopment.kroksample.ui.details
 
-import android.os.Build
-import android.text.Html
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import by.godevelopment.kroksample.common.EMPTY_STRING_LINK
-import by.godevelopment.kroksample.common.EMPTY_STRING_TIME
 import by.godevelopment.kroksample.common.EMPTY_STRING_VALUE
 import by.godevelopment.kroksample.common.TAG
 import by.godevelopment.kroksample.domain.helpers.MediaHelper
+import by.godevelopment.kroksample.domain.helpers.TimeHelper
 import by.godevelopment.kroksample.domain.model.MediaState
 import by.godevelopment.kroksample.domain.usecase.GetViewConvertToModelUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,26 +18,38 @@ import javax.inject.Inject
 @HiltViewModel
 class DetailsViewModel @Inject constructor(
     private val getViewConvertToModelUseCase: GetViewConvertToModelUseCase,
-    private val mediaHelper: MediaHelper
+    private val mediaHelper: MediaHelper,
+    private val timeHelper: TimeHelper
 ) : ViewModel() {
     // input flow
     val navArgs = MutableStateFlow(-1)
 
     // model flow
+    private var currentStateMedia = MediaPlayerStateModel()
     val uiState = MutableStateFlow(UiStateModel())
-    val currentTimeText = EMPTY_STRING_TIME
-    val totalTimeText = EMPTY_STRING_TIME
-
-    // media flow
-
-    // event flow
+    val playerIsOn = MutableStateFlow(false)
     val showProgressBar = MutableStateFlow(false)
     val showPictures = uiState.map {
-        !it.imageView.isNullOrBlank()
-    }.asStateFlow(false)
+        !it.imageView.isNullOrBlank() }.asStateFlow(false)
     val showMediaPlayer = uiState.map {
-        !it.mediaLink.isNullOrBlank()
-    }.asStateFlow(false)
+        !it.mediaLink.isNullOrBlank() }.asStateFlow(false)
+
+    val mediaState = playerIsOn.flatMapLatest {
+        Log.i(TAG, "mediaState: $it")
+        if (it) {
+            timeHelper.tickerFlow().map {
+                MediaPlayerStateModel(
+                    mediaHelper.getDurationMedia(),
+                    mediaHelper.getCurrentPositionMedia()
+                ).also { state ->
+                    currentStateMedia = state
+                    Log.i(TAG, "mediaState: currentStateMedia $currentStateMedia")
+                }
+            }
+        } else flowOf(currentStateMedia)
+    }.asStateFlow(
+        MediaPlayerStateModel()
+    )
 
     val showError = MutableStateFlow(EMPTY_STRING_LINK)
 
@@ -87,19 +97,16 @@ class DetailsViewModel @Inject constructor(
     }
 
     fun onClickPlayPause() {
-        mediaHelper.startMusic()
+        if (mediaHelper.mediaState != MediaState.PLAY ) mediaHelper.startMusic()
+        else mediaHelper.pauseMusic()
+        playerIsOn.value = !playerIsOn.value
     }
 
     fun onClickStop() {
+        currentStateMedia = MediaPlayerStateModel()
+        Log.i(TAG, "onClickStop(): currentStateMedia $currentStateMedia")
         mediaHelper.stopMusic()
-    }
-
-    fun htmlToString(input: String) {
-        val result = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            Html.fromHtml(input, Html.FROM_HTML_MODE_COMPACT)
-        } else {
-            Html.fromHtml(input)
-        }
+        playerIsOn.value = false
     }
 
     private fun <T> Flow<T>.asStateFlow(init: T) =
@@ -113,10 +120,8 @@ class DetailsViewModel @Inject constructor(
         val mediaLink: String? = null
     )
 
-    sealed class MediaPlayerState() {
-        data class Online(val mediaState: MediaState): MediaPlayerState()
-        object OffLine: MediaPlayerState()
-        object Error: MediaPlayerState()
-        object Loading: MediaPlayerState()
-    }
+    data class MediaPlayerStateModel(
+        val DurationMedia: Int = 0,
+        val CurrentPositionMedia: Int = 0
+    )
 }

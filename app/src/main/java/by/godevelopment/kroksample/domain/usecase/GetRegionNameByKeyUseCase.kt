@@ -8,8 +8,8 @@ import javax.inject.Inject
 
 class GetRegionNameByKeyUseCase @Inject constructor(
     private val stringHelper: StringHelper
-) {
-    operator fun invoke(params: Int): String {
+): BaseUseCase<String,Int>() {
+    override suspend fun run(params: Int): String {
         return Region.getRegionNameById(params)?.let { reg ->
             Log.i(TAG, "GetRegionNameByKeyUseCase invoke: $reg")
             stringHelper.getString(reg.text)

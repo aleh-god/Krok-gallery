@@ -31,8 +31,7 @@ class ListPlacesViewModel @Inject constructor(
 
     val header = idKey.flatMapLatest {
         getCityNameByIdCityUserCase(it)
-    }
-        .catch {
+    }.catch {
             Log.i(TAG, "ListViewModel: catch header")
             emit(stringHelper.getString(R.string.error_loading))
         }.asStateFlow(EMPTY_STRING_VALUE)

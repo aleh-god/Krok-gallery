@@ -27,21 +27,16 @@ class ListCitiesViewModel @Inject constructor(
     val out = idKey.flatMapLatest { key ->
         Log.i(TAG, "ListCitiesViewModel out: key = $key")
             getListCitiesByIdRegionUseCase(key, onClickNav.value)
-
     }
 
     // model flow
-    val header = idKey.map {
+    val header = idKey.flatMapLatest {
         Log.i(TAG, "ListViewModel: header = ${it}")
-        getRegionNameByKeyUseCase(it)
-    }
-        .catch {
-            Log.i(TAG, "ListViewModel: catch header")
-            emit(stringHelper.getString(R.string.error_loading))
-        }.asStateFlow(EMPTY_STRING_VALUE)
-
-    private fun <T> Flow<T>.asLiveDataFlow() =
-        shareIn(viewModelScope, SharingStarted.Eagerly, replay = 1)
+        getRegionNameByKeyUseCase.execute(it)
+    }.catch {
+        Log.i(TAG, "ListViewModel: catch header")
+        emit(stringHelper.getString(R.string.error_loading))
+    }.asStateFlow(EMPTY_STRING_VALUE)
 
     private fun <T> Flow<T>.asStateFlow(init: T) =
         stateIn(viewModelScope, SharingStarted.Lazily, init)

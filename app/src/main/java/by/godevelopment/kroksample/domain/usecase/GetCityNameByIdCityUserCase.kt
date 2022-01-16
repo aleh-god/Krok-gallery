@@ -1,5 +1,7 @@
 package by.godevelopment.kroksample.domain.usecase
 
+import android.util.Log
+import by.godevelopment.kroksample.common.TAG
 import by.godevelopment.kroksample.data.repositories.NetworkRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -11,6 +13,7 @@ class GetCityNameByIdCityUserCase @Inject constructor(
     operator fun invoke(params: Int): Flow<String> =
         networkRepository.getAllCities()
             .map { list ->
+                Log.i(TAG, "GetCityNameByIdCityUserCase invoke: ${list.size}")
                 list.first {
                     it.id == params
                 }.name ?: "No information"

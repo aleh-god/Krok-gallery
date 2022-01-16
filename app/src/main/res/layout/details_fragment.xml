@@ -55,8 +55,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/image"
             android:onClick="@{() -> viewModel.onClickPlayPause()}"
-            android:src="@drawable/ic_play_circle"
+            setLiveButton="@{viewModel.playerIsOn}"
             app:isVisible="@{viewModel.showMediaPlayer}"
+            tools:src="@drawable/ic_play_circle"
             />
 
         <ImageButton
@@ -82,7 +83,7 @@
             app:layout_constraintStart_toEndOf="@+id/btn_stop"
             app:layout_constraintTop_toTopOf="@+id/btn_play_pause"
             app:layout_constraintBottom_toBottomOf="@+id/btn_play_pause"
-            android:text="@{viewModel.currentTimeText}"
+            valueToTimeText="@{viewModel.mediaState.currentPositionMedia}"
             app:isVisible="@{viewModel.showMediaPlayer}"
             tools:text="00:00"
             />
@@ -98,6 +99,8 @@
             app:layout_constraintEnd_toStartOf="@+id/time_total"
             app:layout_constraintStart_toEndOf="@+id/time_current"
             app:isVisible="@{viewModel.showMediaPlayer}"
+            android:progress="@{viewModel.mediaState.currentPositionMedia}"
+            android:max="@{viewModel.mediaState.durationMedia}"
             />
 
         <TextView
@@ -109,7 +112,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/btn_play_pause"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/progress_time"
-            android:text="@{viewModel.totalTimeText}"
+            valueToTimeText="@{viewModel.mediaState.durationMedia}"
             app:isVisible="@{viewModel.showMediaPlayer}"
             tools:text="10:00"
             />
@@ -133,7 +136,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:padding="5dp"
-            android:text="@{viewModel.uiState.text}"
+            htmlText="@{viewModel.uiState.text}"
             android:scrollbars="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
