@@ -3,6 +3,7 @@ package by.godevelopment.kroksample.ui.listregions
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import by.godevelopment.kroksample.common.InternetException
 import by.godevelopment.kroksample.common.TAG
 import by.godevelopment.kroksample.data.datasources.krok.KrokData
 import by.godevelopment.kroksample.domain.usecase.GetRegionListUseCase

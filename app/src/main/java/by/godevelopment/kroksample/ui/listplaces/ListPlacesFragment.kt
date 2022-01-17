@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -70,23 +71,20 @@ class ListPlacesFragment : Fragment() {
     private fun setupUI() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                Log.i(TAG, "Fragment : Lifecycle.State.STARTED")
+                Log.i(TAG, "ListPlacesFragment : Lifecycle.State.STARTED")
                 viewModel.out
                     .onStart {
                         binding.progressDownload.visibility = View.VISIBLE
                     }
                     .onEach {
                         setupAdapter(it)
-                        binding.progressDownload.visibility = View.INVISIBLE // View.GONE
-                    }
-                    .onCompletion {
-
+                        binding.progressDownload.visibility = View.INVISIBLE
                     }
                     .catch {
                         Snackbar.make(binding.root, "Loading data failed!", Snackbar.LENGTH_LONG)
                             .setAction("Reload", null) // View.OnClickListener
                             .show()
-                        binding.progressDownload.visibility = View.INVISIBLE // View.GONE
+                        binding.progressDownload.visibility = View.INVISIBLE
                     }.collect()
             }
         }

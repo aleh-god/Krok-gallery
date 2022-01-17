@@ -1,9 +1,6 @@
 package by.godevelopment.kroksample.domain.usecase
 
 import by.godevelopment.kroksample.data.repositories.NetworkRepository
-import by.godevelopment.kroksample.domain.model.DetailsModel
-import by.godevelopment.kroksample.domain.model.Result
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 

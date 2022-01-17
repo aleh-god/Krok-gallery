@@ -55,10 +55,10 @@ class KrokAdapter : RecyclerView.Adapter<KrokAdapter.KrokViewHolder>() {
                 .into(itemImage)
 
             itemText.text = listItemModel.text
-            Log.i(TAG, "onBindViewHolder: itemText.text = ${listItemModel.text}")
+            Log.i(TAG, "KrokAdapter onBindViewHolder: itemText.text = ${listItemModel.text}")
 
             root.setOnClickListener {
-                Log.i(TAG, "onBindViewHolder: id = ${listItemModel.keyId}")
+                Log.i(TAG, "KrokAdapter onBindViewHolder: id = ${listItemModel.keyId}")
                 listItemModel.onClickNav.invoke(listItemModel.keyId)
             }
             // executePendingBindings()

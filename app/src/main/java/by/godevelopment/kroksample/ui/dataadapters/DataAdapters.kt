@@ -26,7 +26,7 @@ fun loadImage(view: ImageView, url: String?) {
     if (!url.isNullOrEmpty()) {
         Glide.with(view.context)
             .load(url)
-            .centerCrop()
+            //.centerCrop()
             .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
             .error(R.drawable.image_not_loaded)
             .placeholder(R.drawable.image)
