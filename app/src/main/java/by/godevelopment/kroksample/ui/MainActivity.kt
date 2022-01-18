@@ -42,14 +42,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
-        R.id.lang_eng -> {
-            Log.i(TAG, "onOptionsItemSelected: ENG_KEY")
-            mainViewModel.setLangPreference(LANG_ENG_KEY)
-            true
-        }
         R.id.lang_by -> {
             Log.i(TAG, "onOptionsItemSelected: BY_KEY")
             mainViewModel.setLangPreference(LANG_BY_KEY)
+            true
+        }
+        R.id.lang_eng -> {
+            Log.i(TAG, "onOptionsItemSelected: ENG_KEY")
+            mainViewModel.setLangPreference(LANG_ENG_KEY)
             true
         }
         R.id.lang_ru -> {
@@ -67,7 +67,6 @@ class MainActivity : AppCompatActivity() {
 
 //        val searchItem = menu?.findItem(R.id.action_search)
 //        val searchView = searchItem?.actionView as SearchView
-
         // Configure the search info and add any event listeners...
 
         return super.onCreateOptionsMenu(menu)

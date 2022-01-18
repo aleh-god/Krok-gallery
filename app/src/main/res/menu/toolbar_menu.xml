@@ -12,13 +12,13 @@
 <!--        app:actionViewClass="androidx.appcompat.widget.SearchView"-->
 <!--        />-->
 
-    <item android:id="@+id/lang_eng"
-        android:title="@string/lang_eng"
+    <item android:id="@+id/lang_by"
+        android:title="@string/lang_by"
         app:showAsAction="never"
         />
 
-    <item android:id="@+id/lang_by"
-        android:title="@string/lang_by"
+    <item android:id="@+id/lang_eng"
+        android:title="@string/lang_eng"
         app:showAsAction="never"
         />
 

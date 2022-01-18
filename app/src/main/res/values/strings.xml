@@ -6,10 +6,11 @@
     <string name="grodno_region_const">Grodno region</string>
     <string name="minsk_region_const">Minsk region</string>
     <string name="mogilev_region_const">Mogilev region</string>
-    <string name="settings">Krok settings</string>
-    <string name="lang_eng">List by english</string>
-    <string name="lang_by">Спіс па беларуску</string>
-    <string name="lang_ru">Список на русском</string>
-    <string name="action_search">Найти кропку</string>
+    <string name="settings">Settings</string>
+    <string name="lang_eng">List in English</string>
+    <string name="lang_by">List in Belarusian</string>
+    <string name="lang_ru">List in Russian</string>
+    <string name="action_search">"Find krok "</string>
     <string name="error_loading">Loading data failed!</string>
+    <string name="cont_descr_item_image">Item image</string>
 </resources>

@@ -77,10 +77,6 @@ class ListRegionsFragment : Fragment() {
                         setupAdapter(it)
                         binding.progressDownload.visibility = View.INVISIBLE // View.GONE
                     }
-                    .onCompletion {
-                        Log.i(TAG, "ListRegionsFragment : .onCompletion")
-
-                    }
                     .catch {
                         Log.i(TAG, "ListRegionsFragment : .catch")
                         Snackbar.make(binding.root, "Loading data failed!", Snackbar.LENGTH_LONG)

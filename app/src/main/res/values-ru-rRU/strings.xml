@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">KrokSample</string>
+    <string name="lang_eng">Список на английском</string>
+    <string name="lang_by">Список на белорусском</string>
+    <string name="lang_ru">Список на русском</string>
+    <string name="minsk_region_const">Минская область</string>
+    <string name="vitebsk_region_const">Витебская область</string>
+    <string name="gomel_region_const">Гомельская область</string>
+    <string name="grodno_region_const">Гродненская область</string>
+    <string name="mogilev_region_const">Могилевская область</string>
+    <string name="brest_region_const">Брестская область</string>
+    <string name="settings">Настройки</string>
+    <string name="error_loading">Ошибка загрузки данных!</string>
+    <string name="cont_descr_item_image">Картинка элемента списка</string>
+    <string name="action_search">Найти место</string>
+</resources>

@@ -54,7 +54,6 @@ class ListCitiesViewModel @Inject constructor(
             Log.i(TAG, "ListCitiesViewModel out: .map-3 ${it}")
             (it as ItemElement).item }
 
-    // layout flow
     val header = idKey.flatMapLatest {
         Log.i(TAG, "ListViewModel: header = $it")
         getRegionNameByKeyUseCase.execute(it)
