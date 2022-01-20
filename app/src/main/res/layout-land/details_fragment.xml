@@ -29,19 +29,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:text="@{viewModel.uiState.header}"
-            tools:text="HEADER" />
+            tools:text="HEADER"
+            />
 
         <ImageView
             android:id="@+id/image"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:contentDescription="@string/cont_descr_view_image"
             android:src="@drawable/ic_launcher_background"
             app:layout_constraintDimensionRatio="w,1:1"
             android:adjustViewBounds="true"
             app:layout_constraintTop_toBottomOf="@+id/header"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/separator"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/btn_play_pause"
             app:isVisible="@{viewModel.showPictures}"
             imageUrl="@{viewModel.uiState.imageView}"
             />
@@ -54,11 +56,12 @@
             app:layout_constraintEnd_toStartOf="@+id/btn_stop"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/image"
+            app:layout_constraintBottom_toBottomOf="parent"
             android:onClick="@{() -> viewModel.onClickPlayPause()}"
             setLiveButton="@{viewModel.playerIsOn}"
             app:isVisible="@{viewModel.showMediaPlayer}"
             tools:src="@drawable/ic_play_circle"
-            />
+            android:contentDescription="@string/cont_descr_play_and_pause_button" />
 
         <ImageButton
             android:id="@+id/btn_stop"
@@ -72,7 +75,7 @@
             android:onClick="@{() -> viewModel.onClickStop()}"
             android:src="@drawable/ic_stop_circle"
             app:isVisible="@{viewModel.showMediaPlayer}"
-            />
+            android:contentDescription="@string/cont_descr_stop_play_button" />
 
         <TextView
             android:id="@+id/time_current"
@@ -110,11 +113,19 @@
             android:padding="5dp"
             app:layout_constraintTop_toTopOf="@+id/btn_play_pause"
             app:layout_constraintBottom_toBottomOf="@+id/btn_play_pause"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/separator"
             app:layout_constraintStart_toEndOf="@+id/progress_time"
             valueToTimeText="@{viewModel.mediaState.durationMedia}"
             app:isVisible="@{viewModel.showMediaPlayer}"
             tools:text="10:00"
+            />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/separator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.6"
             />
 
         <TextView
@@ -125,8 +136,9 @@
             android:gravity="center"
             style="@style/TextAppearance.MaterialComponents.Headline6"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_play_pause"
+            app:layout_constraintStart_toStartOf="@+id/separator"
+            app:layout_constraintTop_toBottomOf="@+id/header"
+            app:layout_constraintBottom_toTopOf="@id/text"
             android:text="@{viewModel.uiState.headerText}"
             tools:text="header text"
             />
@@ -134,13 +146,14 @@
         <TextView
             android:id="@+id/text"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:padding="5dp"
             htmlText="@{viewModel.uiState.text}"
             android:scrollbars="vertical"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/separator"
             app:layout_constraintTop_toBottomOf="@+id/header_text"
+            app:layout_constraintBottom_toBottomOf="parent"
             tools:text="@tools:sample/lorem/random"
             />
 
