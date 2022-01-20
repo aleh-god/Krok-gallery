@@ -16,7 +16,7 @@ import javax.inject.Inject
 class GetRegionListUseCase @Inject constructor(
     private val krokPreferences: KrokPreferences
 ){
-    fun execute(onClick: (Int) -> Unit): Flow<List<ListItemModel>>
+    operator fun invoke(onClick: (Int) -> Unit): Flow<List<ListItemModel>>
     = krokPreferences.stateSharedPreferences.map { idLang ->
         Log.i(TAG, "execute: GetRegionListUseCase start idLang = $idLang")
         KrokData.regionRU.map { regionItem ->

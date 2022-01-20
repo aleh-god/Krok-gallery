@@ -3,10 +3,12 @@ package by.godevelopment.kroksample.ui.details
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import by.godevelopment.kroksample.R
 import by.godevelopment.kroksample.common.EMPTY_STRING_LINK
 import by.godevelopment.kroksample.common.EMPTY_STRING_VALUE
 import by.godevelopment.kroksample.common.TAG
 import by.godevelopment.kroksample.domain.helpers.MediaHelper
+import by.godevelopment.kroksample.domain.helpers.StringHelper
 import by.godevelopment.kroksample.domain.helpers.TimeHelper
 import by.godevelopment.kroksample.domain.model.MediaState
 import by.godevelopment.kroksample.domain.usecase.GetViewConvertToModelUseCase
@@ -19,7 +21,8 @@ import javax.inject.Inject
 class DetailsViewModel @Inject constructor(
     private val getViewConvertToModelUseCase: GetViewConvertToModelUseCase,
     private val mediaHelper: MediaHelper,
-    private val timeHelper: TimeHelper
+    private val timeHelper: TimeHelper,
+    private val stringHelper: StringHelper
 ) : ViewModel() {
     // input flow
     val navArgs = MutableStateFlow(-1)
@@ -51,8 +54,6 @@ class DetailsViewModel @Inject constructor(
         MediaPlayerStateModel()
     )
 
-    val showError = MutableStateFlow(EMPTY_STRING_LINK)
-
     init {
         viewModelScope.launch {
             Log.i(TAG, "DetailsViewModel: init")
@@ -66,9 +67,9 @@ class DetailsViewModel @Inject constructor(
                     .onEach { krok ->
                         Log.i(TAG, "DetailsViewModel: .onEach $krok")
                         uiState.value = UiStateModel(
-                        header = krok.name ?: "No information",
-                        headerText = krok.name ?: "No information",
-                        text = krok.text ?: "No information",
+                        header = krok.name ?: EMPTY_STRING_VALUE,
+                        headerText = krok.name ?: EMPTY_STRING_VALUE,
+                        text = krok.text ?: EMPTY_STRING_VALUE,
                         imageView = krok.photo,
                         mediaLink = krok.sound
                         )
@@ -77,14 +78,16 @@ class DetailsViewModel @Inject constructor(
                     .onCompletion {
                         Log.i(TAG, "DetailsViewModel: .onCompletion")
                         showProgressBar.value = false
+                        mediaHelper.stopMusic()
+                        playerIsOn.value = false
                     }
-                    .catch {
-                        Log.i(TAG, "DetailsViewModel: .catch")
+                    .catch () { exception ->
+                        Log.i(TAG, "DetailsViewModel: .catch ${exception.message}")
                         uiState.value = UiStateModel(
-                        header = "Error!",
-                        headerText = "Loading data failed!"
+                        header = stringHelper.getString(R.string.message_error),
+                        headerText = stringHelper.getString(R.string.message_error_loading)
                         )
-                    }.collect()
+                    }.collect()  //asStateFlow(UiStateModel())
         }
 
         viewModelScope.launch {
@@ -105,6 +108,11 @@ class DetailsViewModel @Inject constructor(
     fun onClickStop() {
         currentStateMedia = MediaPlayerStateModel()
         Log.i(TAG, "onClickStop(): currentStateMedia $currentStateMedia")
+        mediaHelper.stopMusic()
+        playerIsOn.value = false
+    }
+
+    fun onStopMedia() {
         mediaHelper.stopMusic()
         playerIsOn.value = false
     }

@@ -13,8 +13,8 @@
 
         <ImageView
             android:id="@+id/item_image"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="54dp"
+            android:layout_height="54dp"
             android:contentDescription="@string/cont_descr_item_image"
             android:src="@drawable/ic_launcher_background"
             app:layout_constraintDimensionRatio="w,1:1"

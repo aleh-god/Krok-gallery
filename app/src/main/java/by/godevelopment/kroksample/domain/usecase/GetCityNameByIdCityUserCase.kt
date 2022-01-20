@@ -1,6 +1,7 @@
 package by.godevelopment.kroksample.domain.usecase
 
 import android.util.Log
+import by.godevelopment.kroksample.common.EMPTY_STRING_VALUE
 import by.godevelopment.kroksample.common.TAG
 import by.godevelopment.kroksample.data.repositories.NetworkRepository
 import kotlinx.coroutines.flow.Flow
@@ -16,6 +17,6 @@ class GetCityNameByIdCityUserCase @Inject constructor(
                 Log.i(TAG, "GetCityNameByIdCityUserCase invoke: ${list.size}")
                 list.first {
                     it.id == params
-                }.name ?: "No information"
+                }.name ?: EMPTY_STRING_VALUE
             }
 }

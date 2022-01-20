@@ -11,7 +11,9 @@
     <string name="mogilev_region_const">Могилевская область</string>
     <string name="brest_region_const">Брестская область</string>
     <string name="settings">Настройки</string>
-    <string name="error_loading">Ошибка загрузки данных!</string>
     <string name="cont_descr_item_image">Картинка элемента списка</string>
     <string name="action_search">Найти место</string>
+    <string name="message_error_loading">Ошибка загрузки данных!</string>
+    <string name="message_error">Ошибка!</string>
+    <string name="cont_descr_view_image">Просмотр изображения</string>
 </resources>

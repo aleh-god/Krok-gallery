@@ -56,10 +56,10 @@ class ListCitiesViewModel @Inject constructor(
 
     val header = idKey.flatMapLatest {
         Log.i(TAG, "ListViewModel: header = $it")
-        getRegionNameByKeyUseCase.execute(it)
+        getRegionNameByKeyUseCase(it)
     }.catch {
         Log.i(TAG, "ListViewModel: catch header")
-        emit(stringHelper.getString(R.string.error_loading))
+        emit(stringHelper.getString(R.string.message_error_loading))
     }.asStateFlow(EMPTY_STRING_VALUE)
 
 

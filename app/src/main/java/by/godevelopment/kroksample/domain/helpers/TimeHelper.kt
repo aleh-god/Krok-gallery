@@ -8,12 +8,13 @@ import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 
 class TimeHelper @Inject constructor(
-    @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher
+    @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher,
+    private val tickIntervalMs: Long = 1000
 ) {
     fun tickerFlow() = flow {
         while (true) {
             emit(Unit)
-            delay(1000)
+            delay(tickIntervalMs)
         }
     }.flowOn(defaultDispatcher)
 }

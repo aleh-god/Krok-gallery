@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import by.godevelopment.kroksample.common.EMPTY_STRING_VALUE
-import by.godevelopment.kroksample.common.InternetException
 import by.godevelopment.kroksample.common.TAG
 import by.godevelopment.kroksample.data.datasources.krok.KrokData
 import by.godevelopment.kroksample.data.datasources.preferences.KrokPreferences
@@ -27,6 +26,6 @@ class ListRegionsViewModel @Inject constructor(
 
     val out = onClickNav.flatMapLatest {
         Log.i(TAG, "ListRegionsViewModel: onClickNav.flatMapLatest")
-        getRegionListUseCase.execute(it)
+        getRegionListUseCase(it)
     }.shareIn(viewModelScope, SharingStarted.Eagerly, replay = 1)
 }

@@ -1,6 +1,7 @@
 package by.godevelopment.kroksample.domain.usecase
 
 import android.util.Log
+import by.godevelopment.kroksample.common.EMPTY_STRING_VALUE
 import by.godevelopment.kroksample.common.TAG
 import by.godevelopment.kroksample.data.repositories.NetworkRepository
 import by.godevelopment.kroksample.domain.model.ListItemModel
@@ -20,8 +21,8 @@ class GetListViewsByIdCityUserCase @Inject constructor(
                 }.map { view ->
                     ListItemModel(
                         view.id ?: -1,
-                        view.logo ?: "",
-                        view.name ?: "No information",
+                        view.logo ?: EMPTY_STRING_VALUE,
+                        view.name ?: EMPTY_STRING_VALUE,
                         onClick
                     )
                 }

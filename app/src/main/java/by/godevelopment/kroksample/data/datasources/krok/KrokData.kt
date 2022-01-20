@@ -1,6 +1,5 @@
 package by.godevelopment.kroksample.data.datasources.krok
 
-import by.godevelopment.kroksample.domain.model.Region
 import by.godevelopment.kroksample.domain.model.RegionItem
 
 object KrokData {
@@ -11,36 +10,52 @@ object KrokData {
         3 to "Белоруссия"
     )
 
+    val regionStringKey = hashMapOf<Int, String>(
+        1 to "Minsk region",
+        2 to "Vitebsk region",
+        3 to "Gomel region",
+        4 to "Grodno region",
+        5 to "Mogilev region",
+        6 to "Brest region"
+    )
+
     val regionRU = listOf(
-        RegionItem(Region.Minsk.id,"https://krokapp.by/media/regions/566ea590-c705-416b-9257-b8ceaef47849.png", hashMapOf(
+        RegionItem(1,"https://krokapp.by/media/regions/566ea590-c705-416b-9257-b8ceaef47849.png", hashMapOf(
             1 to "Менская вобласьць",
             2 to "Minsk region",
             3 to "Минская область"
         )),
-        RegionItem(Region.Vitebsk.id,"https://krokapp.by/media/regions/08dd0030-72b0-474e-abd0-fdc4c30033d3.png", hashMapOf(
+        RegionItem(2,"https://krokapp.by/media/regions/08dd0030-72b0-474e-abd0-fdc4c30033d3.png", hashMapOf(
             1 to "Віцебская вобласьць",
             2 to "Vitebsk region",
             3 to "Витебская область"
         )),
-        RegionItem(Region.Gomel.id,"https://krokapp.by/media/regions/95e91be1-c182-49cb-b0aa-a66d30ae0352.png", hashMapOf(
+        RegionItem(3,"https://krokapp.by/media/regions/95e91be1-c182-49cb-b0aa-a66d30ae0352.png", hashMapOf(
             1 to "Гомельская вобласьць",
             2 to "Gomel region",
             3 to "Гомельская область"
         )),
-        RegionItem(Region.Grodno.id,"https://krokapp.by/media/regions/6aa7e851-2582-4178-9cb0-a874443d5dbe.png", hashMapOf(
+        RegionItem(4,"https://krokapp.by/media/regions/6aa7e851-2582-4178-9cb0-a874443d5dbe.png", hashMapOf(
             1 to "Гарадзенская вобласьць",
             2 to "Grodno region",
             3 to "Гродненская область"
         )),
-        RegionItem(Region.Mogilev.id,"https://krokapp.by/media/regions/881a1cae-b16a-4b54-a92e-7d6838d46ef9.png", hashMapOf(
+        RegionItem(5,"https://krokapp.by/media/regions/881a1cae-b16a-4b54-a92e-7d6838d46ef9.png", hashMapOf(
             1 to "Магілёўская вобласьць",
             2 to "Mogilev region",
             3 to "Могилевская область"
         )),
-        RegionItem(Region.Brest.id,"https://krokapp.by/media/regions/21b19d7c-9774-45b0-986a-c67b9dcd6895.png", hashMapOf(
+        RegionItem(6,"https://krokapp.by/media/regions/21b19d7c-9774-45b0-986a-c67b9dcd6895.png", hashMapOf(
             1 to "Берасьцейская вобласьць",
             2 to "Brest region",
             3 to "Брестская область"
         ))
     )
 }
+
+//    Minsk(1, R.string.minsk_region_const, R.drawable.minsk_region),
+//    Vitebsk(2, R.string.vitebsk_region_const, R.drawable.vitebsk_region),
+//    Gomel(3, R.string.gomel_region_const, R.drawable.gomel_region),
+//    Grodno(4, R.string.grodno_region_const, R.drawable.grodno_region),
+//    Mogilev(5, R.string.mogilev_region_const, R.drawable.mogilev_region),
+//    Brest(6, R.string.brest_region_const, R.drawable.brest_region);

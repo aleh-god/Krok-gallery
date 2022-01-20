@@ -59,7 +59,7 @@ class ListPlacesViewModel @Inject constructor(
         getCityNameByIdCityUserCase(it)
     }.catch {
         Log.i(TAG, "ListViewModel: catch header")
-        emit(stringHelper.getString(R.string.error_loading))
+        emit(stringHelper.getString(R.string.message_error_loading))
     }.asStateFlow(EMPTY_STRING_VALUE)
 
     private fun <T> Flow<T>.asStateFlow(init: T) =

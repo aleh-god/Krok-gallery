@@ -6,7 +6,6 @@
     <string name="lang_ru">"Спіс на рускай "</string>
     <string name="action_search">Знайсці месца</string>
     <string name="cont_descr_item_image">Карцінка элемента спіса</string>
-    <string name="error_loading">Памылка загрузкі дадзеных!</string>
     <string name="settings">Наладкі</string>
     <string name="brest_region_const">Берасьцейская вобласьць</string>
     <string name="vitebsk_region_const">Віцебская вобласьць</string>
@@ -14,4 +13,7 @@
     <string name="grodno_region_const">Гарадзенская вобласьць</string>
     <string name="minsk_region_const">Менская вобласьць</string>
     <string name="mogilev_region_const">Магілёўская вобласьць</string>
+    <string name="message_error_loading">Памылка загрузкі дадзеных!</string>
+    <string name="message_error">Памылка!</string>
+    <string name="cont_descr_view_image">Прагляд выявы</string>
 </resources>
