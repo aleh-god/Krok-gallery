@@ -4,14 +4,13 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import by.godevelopment.kroksample.R
-import by.godevelopment.kroksample.common.EMPTY_STRING_LINK
 import by.godevelopment.kroksample.common.EMPTY_STRING_VALUE
 import by.godevelopment.kroksample.common.TAG
 import by.godevelopment.kroksample.domain.helpers.MediaHelper
 import by.godevelopment.kroksample.domain.helpers.StringHelper
 import by.godevelopment.kroksample.domain.helpers.TimeHelper
 import by.godevelopment.kroksample.domain.model.MediaState
-import by.godevelopment.kroksample.domain.usecase.GetViewConvertToModelUseCase
+import by.godevelopment.kroksample.domain.usecase.GetViewByIdUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -19,7 +18,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailsViewModel @Inject constructor(
-    private val getViewConvertToModelUseCase: GetViewConvertToModelUseCase,
+    private val getViewByIdUseCase: GetViewByIdUseCase,
     private val mediaHelper: MediaHelper,
     private val timeHelper: TimeHelper,
     private val stringHelper: StringHelper
@@ -46,7 +45,6 @@ class DetailsViewModel @Inject constructor(
                     mediaHelper.getCurrentPositionMedia()
                 ).also { state ->
                     currentStateMedia = state
-                    Log.i(TAG, "mediaState: currentStateMedia $currentStateMedia")
                 }
             }
         } else flowOf(currentStateMedia)
@@ -58,7 +56,7 @@ class DetailsViewModel @Inject constructor(
         viewModelScope.launch {
             Log.i(TAG, "DetailsViewModel: init")
             navArgs.flatMapLatest {
-                getViewConvertToModelUseCase(it)
+                getViewByIdUseCase(it)
             }
                     .onStart {
                         Log.i(TAG, "DetailsViewModel: .onStart")
@@ -87,7 +85,7 @@ class DetailsViewModel @Inject constructor(
                         header = stringHelper.getString(R.string.message_error),
                         headerText = stringHelper.getString(R.string.message_error_loading)
                         )
-                    }.collect()  //asStateFlow(UiStateModel())
+                    }.collect() //asStateFlow(UiStateModel())
         }
 
         viewModelScope.launch {

@@ -9,3 +9,5 @@ const val EMPTY_STRING_TIME = "00:00"
 const val LANG_BY_KEY = 1
 const val LANG_ENG_KEY = 2
 const val LANG_RU_KEY = 3
+
+const val TICK_INTERVAL_MS: Long = 1000

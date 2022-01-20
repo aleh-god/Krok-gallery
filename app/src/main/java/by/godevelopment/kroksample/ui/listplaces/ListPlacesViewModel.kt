@@ -4,8 +4,8 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import by.godevelopment.kroksample.R
+import by.godevelopment.kroksample.common.ApplicationException
 import by.godevelopment.kroksample.common.EMPTY_STRING_VALUE
-import by.godevelopment.kroksample.common.InternetException
 import by.godevelopment.kroksample.common.TAG
 import by.godevelopment.kroksample.domain.helpers.StringHelper
 import by.godevelopment.kroksample.domain.model.*
@@ -46,13 +46,12 @@ class ListPlacesViewModel @Inject constructor(
         }
         .shareIn(viewModelScope, SharingStarted.Eagerly, 1)
         .map {
-            Log.i(TAG, "ListPlacesViewModel out: .map-2 ${it}")
-            if (it is ErrorElement) throw it.error
+            if (it is ErrorElement) throw ApplicationException()
             return@map it
         }
         .takeWhile { it is ItemElement }
         .map {
-            Log.i(TAG, "ListPlacesViewModel out: .map-3 ${it}")
+            Log.i(TAG, "ListPlacesViewModel out: .map $it")
             (it as ItemElement).item }
 
     val header = idKey.flatMapLatest {
@@ -64,7 +63,4 @@ class ListPlacesViewModel @Inject constructor(
 
     private fun <T> Flow<T>.asStateFlow(init: T) =
         stateIn(viewModelScope, SharingStarted.Lazily, init)
-
-    private fun <T> Flow<T>.asLiveDataFlow() =
-        shareIn(viewModelScope, SharingStarted.Eagerly, replay = 1)
 }

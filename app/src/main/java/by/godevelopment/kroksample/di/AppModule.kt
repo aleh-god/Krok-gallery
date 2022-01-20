@@ -76,6 +76,6 @@ object AppModule {
     @Singleton
     fun provideNetworkRepository(
         krokRemoteDataSource: KrokRemoteDataSource,
-        krokPreferences: KrokPreferences
-    ): NetworkRepository = NetworkRepository(krokRemoteDataSource, krokPreferences)
+        externalScope: CoroutineScope
+    ): NetworkRepository = NetworkRepository(krokRemoteDataSource, externalScope)
 }
