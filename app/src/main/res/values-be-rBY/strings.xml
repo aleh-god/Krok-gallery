@@ -16,4 +16,7 @@
     <string name="message_error_loading">Памылка загрузкі дадзеных!</string>
     <string name="message_error">Памылка!</string>
     <string name="cont_descr_view_image">Прагляд выявы</string>
+    <string name="cont_descr_play_and_pause_button">Кнопка прайгравання і паўзы</string>
+    <string name="cont_descr_stop_button">Кнопка прыпынку</string>
+    <string name="switch_theme">Пераключыце тэму</string>
 </resources>

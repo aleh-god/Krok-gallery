@@ -1,5 +1,6 @@
 package by.godevelopment.kroksample.ui
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -8,6 +9,7 @@ import android.widget.SearchView
 import android.widget.Toolbar
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -55,6 +57,16 @@ class MainActivity : AppCompatActivity() {
         R.id.lang_ru -> {
             Log.i(TAG, "onOptionsItemSelected: RU_KEY")
             mainViewModel.setLangPreference(LANG_RU_KEY)
+            true
+        }
+        R.id.switch_theme -> {
+            // first check which theme is currently selected and apply a new theme based on the result.
+            when (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
+                Configuration.UI_MODE_NIGHT_YES ->
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                Configuration.UI_MODE_NIGHT_NO ->
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            }
             true
         }
         else -> {

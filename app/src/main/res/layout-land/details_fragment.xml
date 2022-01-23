@@ -8,26 +8,22 @@
         <variable
             name="viewModel"
             type="by.godevelopment.kroksample.ui.details.DetailsViewModel" />
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.details.DetailsFragment"
-        android:padding="5dp"
         >
 
         <TextView
             android:id="@+id/header"
-            style="@style/TextAppearance.MaterialComponents.Headline4"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            style="@style/Widget.Krok.TextView.Header"
             android:text="@{viewModel.uiState.header}"
             tools:text="HEADER"
             />
@@ -36,27 +32,24 @@
             android:id="@+id/image"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:contentDescription="@string/cont_descr_view_image"
-            android:src="@drawable/ic_launcher_background"
-            app:layout_constraintDimensionRatio="w,1:1"
-            android:adjustViewBounds="true"
             app:layout_constraintTop_toBottomOf="@+id/header"
             app:layout_constraintEnd_toStartOf="@id/separator"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toTopOf="@id/btn_play_pause"
+            android:contentDescription="@string/cont_descr_view_image"
+            android:src="@drawable/ic_launcher_background"
+            android:adjustViewBounds="true"
             app:isVisible="@{viewModel.showPictures}"
             imageUrl="@{viewModel.uiState.imageView}"
             />
 
         <ImageButton
             android:id="@+id/btn_play_pause"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
             app:layout_constraintEnd_toStartOf="@+id/btn_stop"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/image"
             app:layout_constraintBottom_toBottomOf="parent"
+            style="@style/Widget.Krok.ImageButton"
             android:onClick="@{() -> viewModel.onClickPlayPause()}"
             setLiveButton="@{viewModel.playerIsOn}"
             app:isVisible="@{viewModel.showMediaPlayer}"
@@ -65,27 +58,25 @@
 
         <ImageButton
             android:id="@+id/btn_stop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
             app:layout_constraintStart_toEndOf="@+id/btn_play_pause"
             app:layout_constraintEnd_toStartOf="@+id/time_current"
             app:layout_constraintTop_toTopOf="@+id/btn_play_pause"
             app:layout_constraintBottom_toBottomOf="@+id/btn_play_pause"
+            style="@style/Widget.Krok.ImageButton"
             android:onClick="@{() -> viewModel.onClickStop()}"
             android:src="@drawable/ic_stop_circle"
             app:isVisible="@{viewModel.showMediaPlayer}"
-            android:contentDescription="@string/cont_descr_stop_play_button" />
+            android:contentDescription="@string/cont_descr_stop_button" />
 
         <TextView
             android:id="@+id/time_current"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="5dp"
             app:layout_constraintEnd_toStartOf="@+id/progress_time"
             app:layout_constraintStart_toEndOf="@+id/btn_stop"
             app:layout_constraintTop_toTopOf="@+id/btn_play_pause"
             app:layout_constraintBottom_toBottomOf="@+id/btn_play_pause"
+            style="@style/Widget.Krok.TextView.TimePlayer"
             valueToTimeText="@{viewModel.mediaState.currentPositionMedia}"
             app:isVisible="@{viewModel.showMediaPlayer}"
             tools:text="00:00"
@@ -93,7 +84,6 @@
 
         <ProgressBar
             android:id="@+id/progress_time"
-            style="@android:style/Widget.ProgressBar.Horizontal"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:scrollbarStyle="insideInset"
@@ -101,6 +91,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/btn_play_pause"
             app:layout_constraintEnd_toStartOf="@+id/time_total"
             app:layout_constraintStart_toEndOf="@+id/time_current"
+            style="@android:style/Widget.ProgressBar.Horizontal"
             app:isVisible="@{viewModel.showMediaPlayer}"
             android:progress="@{viewModel.mediaState.currentPositionMedia}"
             android:max="@{viewModel.mediaState.durationMedia}"
@@ -110,11 +101,11 @@
             android:id="@+id/time_total"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="5dp"
             app:layout_constraintTop_toTopOf="@+id/btn_play_pause"
             app:layout_constraintBottom_toBottomOf="@+id/btn_play_pause"
             app:layout_constraintEnd_toStartOf="@+id/separator"
             app:layout_constraintStart_toEndOf="@+id/progress_time"
+            style="@style/Widget.Krok.TextView.TimePlayer"
             valueToTimeText="@{viewModel.mediaState.durationMedia}"
             app:isVisible="@{viewModel.showMediaPlayer}"
             tools:text="10:00"
@@ -129,16 +120,14 @@
             />
 
         <TextView
-            android:id="@+id/header_text"
+            android:id="@+id/title_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:gravity="center"
-            style="@style/TextAppearance.MaterialComponents.Headline6"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/separator"
             app:layout_constraintTop_toBottomOf="@+id/header"
             app:layout_constraintBottom_toTopOf="@id/text"
+            style="@style/Widget.Krok.TextView.Title"
             android:text="@{viewModel.uiState.headerText}"
             tools:text="header text"
             />
@@ -147,13 +136,13 @@
             android:id="@+id/text"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:padding="5dp"
-            htmlText="@{viewModel.uiState.text}"
-            android:scrollbars="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/separator"
-            app:layout_constraintTop_toBottomOf="@+id/header_text"
+            app:layout_constraintTop_toBottomOf="@+id/title_text"
             app:layout_constraintBottom_toBottomOf="parent"
+            style="@style/Widget.Krok.TextView.Body"
+            htmlText="@{viewModel.uiState.text}"
+            android:scrollbars="vertical"
             tools:text="@tools:sample/lorem/random"
             />
 

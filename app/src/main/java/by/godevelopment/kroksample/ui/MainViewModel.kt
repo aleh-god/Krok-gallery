@@ -12,10 +12,6 @@ class MainViewModel @Inject constructor(
     private val preferences: KrokPreferences
 ) : ViewModel() {
 
-    // TODO = "delete this"
-//    val header = MutableStateFlow(KrokData.header)
-//    var onClickNav: MutableStateFlow<(Int) -> Unit> = MutableStateFlow { }
-
     fun setLangPreference(key: Int) {
         preferences.setCurrentLanguage(key)
     }

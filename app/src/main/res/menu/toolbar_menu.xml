@@ -12,6 +12,13 @@
 <!--        app:actionViewClass="androidx.appcompat.widget.SearchView"-->
 <!--        />-->
 
+    <item
+        android:id="@+id/switch_theme"
+        android:title="@string/switch_theme"
+        android:icon="@drawable/ic_switch_theme"
+        app:showAsAction="ifRoom"
+        />
+
     <item android:id="@+id/lang_by"
         android:title="@string/lang_by"
         app:showAsAction="never"

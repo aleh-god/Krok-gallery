@@ -16,4 +16,7 @@
     <string name="message_error_loading">Ошибка загрузки данных!</string>
     <string name="message_error">Ошибка!</string>
     <string name="cont_descr_view_image">Просмотр изображения</string>
+    <string name="cont_descr_stop_button">Кнопка остановки</string>
+    <string name="cont_descr_play_and_pause_button">Кнопка воспроизведения и паузы</string>
+    <string name="switch_theme">Переключить тему</string>
 </resources>
