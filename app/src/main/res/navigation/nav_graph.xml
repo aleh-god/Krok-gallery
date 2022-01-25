@@ -54,7 +54,7 @@
     <fragment
         android:id="@+id/detailsPoint"
         android:name="by.godevelopment.kroksample.ui.details.DetailsFragment"
-        android:label="Details"
+        android:label="Details view"
         tools:layout="@layout/details_fragment"
         >
         <action

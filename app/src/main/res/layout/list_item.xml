@@ -6,25 +6,23 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        app:contentPadding="5dp"
+        android:layout_margin="@dimen/margin_main"
+        app:contentPadding="@dimen/padding_main"
         app:cardElevation="2dp"
-        app:cardBackgroundColor="@android:color/white"
         app:cardPreventCornerOverlap="true"
         >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/item"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginVertical="0dp"
-        android:layout_marginHorizontal="10dp"
+        android:layout_height="@dimen/size_item"
+        android:layout_marginHorizontal="@dimen/margin_item"
         >
 
         <ImageView
             android:id="@+id/item_image"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="@dimen/size_item"
+            android:layout_height="@dimen/size_item"
             android:contentDescription="@string/cont_descr_item_image"
             android:src="@drawable/ic_launcher_background"
             app:layout_constraintDimensionRatio="w,1:1"
@@ -39,8 +37,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="start"
-            android:layout_marginStart="16dp"
-            style="@style/TextAppearance.Krok.Body"
+            android:layout_marginStart="@dimen/margin_big"
+            android:textSize="@dimen/size_text_body"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/item_image"
             app:layout_constraintTop_toTopOf="@id/item_image"
