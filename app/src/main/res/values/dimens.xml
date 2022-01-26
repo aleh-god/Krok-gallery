@@ -10,4 +10,5 @@
         <dimen name="size_image_button">40dp</dimen>
         <dimen name="size_text_body">16sp</dimen>
         <dimen name="elevation">2dp</dimen>
+        <dimen name="progress_bar_marginTop">200dp</dimen>
 </resources>

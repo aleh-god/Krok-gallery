@@ -19,4 +19,8 @@
     <string name="cont_descr_stop_button">Кнопка остановки</string>
     <string name="cont_descr_play_and_pause_button">Кнопка воспроизведения и паузы</string>
     <string name="switch_theme">Переключить тему</string>
+    <string name="label_list_places">Список мест</string>
+    <string name="label_list_cities">Список городов</string>
+    <string name="label_list_regions">Список регионов</string>
+    <string name="label_details_view">Просмотр сведений</string>
 </resources>

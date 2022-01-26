@@ -9,7 +9,7 @@
     <fragment
         android:id="@+id/listPlacesPoint"
         android:name="by.godevelopment.kroksample.ui.listplaces.ListPlacesFragment"
-        android:label="List Places"
+        android:label="@string/label_list_places"
         tools:layout="@layout/list_places_fragment"
         >
         <action
@@ -26,7 +26,7 @@
     <fragment
         android:id="@+id/listCitiesPoint"
         android:name="by.godevelopment.kroksample.ui.listcities.ListCitiesFragment"
-        android:label="List Cities"
+        android:label="@string/label_list_cities"
         tools:layout="@layout/list_cities_fragment"
         >
         <action
@@ -43,7 +43,7 @@
     <fragment
         android:id="@+id/listRegionsPoint"
         android:name="by.godevelopment.kroksample.ui.listregions.ListRegionsFragment"
-        android:label="List Regions"
+        android:label="@string/label_list_regions"
         tools:layout="@layout/list_regions_fragment"
         >
         <action
@@ -54,7 +54,7 @@
     <fragment
         android:id="@+id/detailsPoint"
         android:name="by.godevelopment.kroksample.ui.details.DetailsFragment"
-        android:label="Details view"
+        android:label="@string/label_details_view"
         tools:layout="@layout/details_fragment"
         >
         <action

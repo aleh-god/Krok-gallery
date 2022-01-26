@@ -142,11 +142,13 @@
             android:id="@+id/progress_download"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="200dp"
+            android:layout_marginTop="@dimen/progress_bar_marginTop"
             app:isVisible="@{viewModel.showProgressBar}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/header" />
+            app:layout_constraintTop_toBottomOf="@+id/header"
+            style="@style/Widget.Krok.ProgressBar"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </layout>

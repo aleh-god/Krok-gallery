@@ -48,14 +48,13 @@ class KrokAdapter : RecyclerView.Adapter<KrokAdapter.KrokViewHolder>() {
         holder.binding.apply {
             Glide.with(root)
                 .load(listItemModel.pictures)
-                .centerCrop()
+                .fitCenter()
                 .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                 .error(R.drawable.image_not_loaded)
                 .placeholder(R.drawable.image)
                 .into(itemImage)
 
             itemText.text = listItemModel.text
-            Log.i(TAG, "KrokAdapter onBindViewHolder: itemText.text = ${listItemModel.text}")
 
             root.setOnClickListener {
                 Log.i(TAG, "KrokAdapter onBindViewHolder: id = ${listItemModel.keyId}")

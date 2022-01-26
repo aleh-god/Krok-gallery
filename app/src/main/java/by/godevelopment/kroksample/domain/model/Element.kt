@@ -1,7 +1,5 @@
 package by.godevelopment.kroksample.domain.model
 
-// --- helper classes for materializing source flows
-
 sealed class Element<T>
 
 class ItemElement<T>(

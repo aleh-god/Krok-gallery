@@ -10,6 +10,10 @@
         <item name="android:background">?attr/colorPrimary</item>
     </style>
 
+    <style name="Widget.Krok.ProgressBar" parent="Widget.MaterialComponents.Button">
+        <item name="android:indeterminateTint">?attr/colorOnPrimaryContainer</item>
+    </style>
+
     <style name="Widget.Krok.TextView.Header" parent="Widget.MaterialComponents.TextView">
         <item name="android:textAppearance">@style/TextAppearance.Krok.Header</item>
         <item name="android:background">?attr/colorPrimary</item>

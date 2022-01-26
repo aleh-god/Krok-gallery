@@ -18,4 +18,8 @@
     <string name="cont_descr_stop_button">Stop button</string>
     <string name="cont_descr_play_and_pause_button">Play and pause button</string>
     <string name="switch_theme">Switch theme</string>
+    <string name="label_list_places">List Places</string>
+    <string name="label_list_cities">List Cities</string>
+    <string name="label_list_regions">List Regions</string>
+    <string name="label_details_view">Details view</string>
 </resources>

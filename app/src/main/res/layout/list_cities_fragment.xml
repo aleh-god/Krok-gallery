@@ -50,6 +50,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
+            style="@style/Widget.Krok.ProgressBar"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
