@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="by.godevelopment.kroksample.ui.details.DetailsViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.details.DetailsFragment"
+        >
+
+        <TextView
+            android:id="@+id/header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            style="@style/Widget.Krok.TextView.Header"
+            android:text="@{viewModel.uiState.header}"
+            tools:text="HEADER"
+            />
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@+id/header"
+            app:layout_constraintEnd_toStartOf="@id/separator"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/btn_play_pause"
+            android:contentDescription="@string/cont_descr_view_image"
+            android:src="@drawable/ic_launcher_background"
+            android:adjustViewBounds="true"
+            app:isVisible="@{viewModel.showPictures}"
+            imageUrl="@{viewModel.uiState.imageView}"
+            />
+
+        <ImageButton
+            android:id="@+id/btn_play_pause"
+            app:layout_constraintEnd_toStartOf="@+id/btn_stop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/image"
+            app:layout_constraintBottom_toBottomOf="parent"
+            style="@style/Widget.Krok.ImageButton"
+            android:onClick="@{() -> viewModel.onClickPlayPause()}"
+            setLiveButton="@{viewModel.playerIsOn}"
+            app:isVisible="@{viewModel.showMediaPlayer}"
+            tools:src="@drawable/ic_play_circle"
+            android:contentDescription="@string/cont_descr_play_and_pause_button" />
+
+        <ImageButton
+            android:id="@+id/btn_stop"
+            app:layout_constraintStart_toEndOf="@+id/btn_play_pause"
+            app:layout_constraintEnd_toStartOf="@+id/time_current"
+            app:layout_constraintTop_toTopOf="@+id/btn_play_pause"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_play_pause"
+            style="@style/Widget.Krok.ImageButton"
+            android:onClick="@{() -> viewModel.onClickStop()}"
+            android:src="@drawable/ic_stop_circle"
+            app:isVisible="@{viewModel.showMediaPlayer}"
+            android:contentDescription="@string/cont_descr_stop_button" />
+
+        <TextView
+            android:id="@+id/time_current"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@+id/progress_time"
+            app:layout_constraintStart_toEndOf="@+id/btn_stop"
+            app:layout_constraintTop_toTopOf="@+id/btn_play_pause"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_play_pause"
+            style="@style/Widget.Krok.TextView.TimePlayer"
+            valueToTimeText="@{viewModel.mediaState.currentPositionMedia}"
+            app:isVisible="@{viewModel.showMediaPlayer}"
+            tools:text="00:00"
+            />
+
+        <ProgressBar
+            android:id="@+id/progress_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:scrollbarStyle="insideInset"
+            app:layout_constraintTop_toTopOf="@+id/btn_play_pause"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_play_pause"
+            app:layout_constraintEnd_toStartOf="@+id/time_total"
+            app:layout_constraintStart_toEndOf="@+id/time_current"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            app:isVisible="@{viewModel.showMediaPlayer}"
+            android:progress="@{viewModel.mediaState.currentPositionMedia}"
+            android:max="@{viewModel.mediaState.durationMedia}"
+            />
+
+        <TextView
+            android:id="@+id/time_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@+id/btn_play_pause"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_play_pause"
+            app:layout_constraintEnd_toStartOf="@+id/separator"
+            app:layout_constraintStart_toEndOf="@+id/progress_time"
+            style="@style/Widget.Krok.TextView.TimePlayer"
+            valueToTimeText="@{viewModel.mediaState.durationMedia}"
+            app:isVisible="@{viewModel.showMediaPlayer}"
+            tools:text="10:00"
+            />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/separator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.6"
+            />
+
+        <TextView
+            android:id="@+id/title_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/separator"
+            app:layout_constraintTop_toBottomOf="@+id/header"
+            app:layout_constraintBottom_toTopOf="@id/text"
+            style="@style/Widget.Krok.TextView.Title"
+            android:text="@{viewModel.uiState.headerText}"
+            tools:text="header text"
+            />
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/separator"
+            app:layout_constraintTop_toBottomOf="@+id/title_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            style="@style/Widget.Krok.TextView.Body"
+            htmlText="@{viewModel.uiState.text}"
+            android:scrollbars="vertical"
+            tools:text="@tools:sample/lorem/random"
+            />
+
+        <ProgressBar
+            android:id="@+id/progress_download"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:isVisible="@{viewModel.showProgressBar}"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

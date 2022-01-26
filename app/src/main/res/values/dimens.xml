@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+        <dimen name="size_item">70dp</dimen>
+        <dimen name="margin_item">10dp</dimen>
+        <dimen name="padding_main">5dp</dimen>
+        <dimen name="padding_big">15dp</dimen>
+        <dimen name="margin_main">5dp</dimen>
+        <dimen name="margin_big">15dp</dimen>
+        <dimen name="padding_small">2dp</dimen>
+        <dimen name="size_image_button">40dp</dimen>
+        <dimen name="size_text_body">16sp</dimen>
+        <dimen name="elevation">2dp</dimen>
+        <dimen name="progress_bar_marginTop">200dp</dimen>
+</resources>

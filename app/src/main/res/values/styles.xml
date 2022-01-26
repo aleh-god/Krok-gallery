@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Widget.Krok.Toolbar" parent="Widget.AppCompat.Toolbar">
+        <item name="titleTextAppearance">@style/TextAppearance.Krok.Toolbar</item>
+        <item name="android:background">?attr/colorPrimary</item>
+        <item name="android:elevation">@dimen/elevation</item>
+    </style>
+
+    <style name="Widget.Krok.Recyclerview" parent="Widget.MaterialComponents.CardView">
+        <item name="android:background">?attr/colorPrimary</item>
+    </style>
+
+    <style name="Widget.Krok.ProgressBar" parent="Widget.MaterialComponents.Button">
+        <item name="android:indeterminateTint">?attr/colorOnPrimaryContainer</item>
+    </style>
+
+    <style name="Widget.Krok.TextView.Header" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textAppearance">@style/TextAppearance.Krok.Header</item>
+        <item name="android:background">?attr/colorPrimary</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">@dimen/padding_main</item>
+    </style>
+
+    <style name="Widget.Krok.TextView.Title" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textAppearance">@style/TextAppearance.Krok.Title</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">@dimen/padding_main</item>
+    </style>
+
+    <style name="Widget.Krok.TextView.Body" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textAppearance">@style/TextAppearance.Krok.Body</item>
+        <item name="android:gravity">start</item>
+        <item name="android:padding">@dimen/padding_big</item>
+    </style>
+
+    <style name="Widget.Krok.TextView.TimePlayer" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textAppearance">@style/TextAppearance.Krok.Body</item>
+        <item name="android:padding">@dimen/padding_small</item>
+    </style>
+
+    <style name="Widget.Krok.ImageButton" parent="Widget.MaterialComponents.TimePicker.ImageButton">
+        <item name="android:layout_width">@dimen/size_image_button</item>
+        <item name="android:layout_height">@dimen/size_image_button</item>
+        <item name="android:padding">@dimen/padding_small</item>
+        <item name="android:backgroundTint">?attr/colorPrimary</item>
+        <item name="android:tint">?attr/colorOnPrimary</item>
+    </style>
+
+    <style name="TextAppearance.Krok.Toolbar" parent="TextAppearance.MaterialComponents.Button">
+        <item name="android:textSize">@dimen/size_text_body</item>
+    </style>
+
+    <style name="TextAppearance.Krok.Body" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textColor">?attr/colorOnBackground</item>
+        <item name="android:textSize">@dimen/size_text_body</item>
+    </style>
+
+    <style name="TextAppearance.Krok.Header" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="android:textStyle">bold</item>
+        <item name="textAllCaps">true</item>
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+    </style>
+
+    <style name="TextAppearance.Krok.Title" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">?attr/colorOnBackground</item>
+    </style>
+</resources>

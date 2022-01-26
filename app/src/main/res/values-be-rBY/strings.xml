@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">KrokSample</string>
+    <string name="lang_by">Спіс на беларускай</string>
+    <string name="lang_eng">Спіс на ангельскай</string>
+    <string name="lang_ru">"Спіс на рускай "</string>
+    <string name="action_search">Знайсці месца</string>
+    <string name="cont_descr_item_image">Карцінка элемента спіса</string>
+    <string name="settings">Наладкі</string>
+    <string name="brest_region_const">Берасьцейская вобласьць</string>
+    <string name="vitebsk_region_const">Віцебская вобласьць</string>
+    <string name="gomel_region_const">Гомельская вобласьць</string>
+    <string name="grodno_region_const">Гарадзенская вобласьць</string>
+    <string name="minsk_region_const">Менская вобласьць</string>
+    <string name="mogilev_region_const">Магілёўская вобласьць</string>
+    <string name="message_error_loading">Памылка загрузкі дадзеных!</string>
+    <string name="message_error">Памылка!</string>
+    <string name="cont_descr_view_image">Прагляд выявы</string>
+    <string name="cont_descr_play_and_pause_button">Кнопка прайгравання і паўзы</string>
+    <string name="cont_descr_stop_button">Кнопка прыпынку</string>
+    <string name="switch_theme">Пераключыце тэму</string>
+    <string name="label_list_cities">Спіс гарадоў</string>
+    <string name="label_list_regions">Спіс рэгіёнаў</string>
+    <string name="label_details_view">Прагляд дэталяў</string>
+    <string name="label_list_views">Спіс месцаў</string>
+</resources>

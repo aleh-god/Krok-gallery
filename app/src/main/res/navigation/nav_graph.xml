@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/listRegionsPoint">
+
+    <fragment
+        android:id="@+id/listViewsPoint"
+        android:name="by.godevelopment.kroksample.ui.listviews.ListViewsFragment"
+        android:label="@string/label_list_views"
+        tools:layout="@layout/list_views_fragment"
+        >
+        <action
+            android:id="@+id/action_listViewsPoint_to_listCitiesPoint"
+            app:destination="@id/listCitiesPoint" />
+        <action
+            android:id="@+id/action_listViewsPoint_to_detailsPoint"
+            app:destination="@id/detailsPoint" />
+        <argument
+            android:name="id_key"
+            app:argType="integer" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/listCitiesPoint"
+        android:name="by.godevelopment.kroksample.ui.listcities.ListCitiesFragment"
+        android:label="@string/label_list_cities"
+        tools:layout="@layout/list_cities_fragment"
+        >
+        <action
+            android:id="@+id/action_listCitiesPoint_to_listRegionsPoint"
+            app:destination="@id/listRegionsPoint" />
+        <action
+            android:id="@+id/action_listCitiesPoint_to_listViewsPoint"
+            app:destination="@id/listViewsPoint" />
+        <argument
+            android:name="id_key"
+            app:argType="integer" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/listRegionsPoint"
+        android:name="by.godevelopment.kroksample.ui.listregions.ListRegionsFragment"
+        android:label="@string/label_list_regions"
+        tools:layout="@layout/list_regions_fragment"
+        >
+        <action
+            android:id="@+id/action_listRegionsPoint_to_listCitiesPoint"
+            app:destination="@id/listCitiesPoint" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailsPoint"
+        android:name="by.godevelopment.kroksample.ui.details.DetailsFragment"
+        android:label="@string/label_details_view"
+        tools:layout="@layout/details_fragment"
+        >
+        <action
+            android:id="@+id/action_detailsPoint_to_listViewsPoint"
+            app:destination="@id/listViewsPoint" />
+        <argument
+            android:name="id_key"
+            app:argType="integer" />
+    </fragment>
+</navigation>

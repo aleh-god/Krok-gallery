@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">KrokSample</string>
+    <string name="brest_region_const">Brest region</string>
+    <string name="vitebsk_region_const">Vitebsk region</string>
+    <string name="gomel_region_const">Gomel region</string>
+    <string name="grodno_region_const">Grodno region</string>
+    <string name="minsk_region_const">Minsk region</string>
+    <string name="mogilev_region_const">Mogilev region</string>
+    <string name="settings">Settings</string>
+    <string name="lang_eng">List in English</string>
+    <string name="lang_by">List in Belarusian</string>
+    <string name="lang_ru">List in Russian</string>
+    <string name="action_search">"Find krok"</string>
+    <string name="message_error_loading">Loading data failed!</string>
+    <string name="cont_descr_item_image">Item image</string>
+    <string name="message_error">Error!</string>
+    <string name="cont_descr_view_image">View Image</string>
+    <string name="cont_descr_stop_button">Stop button</string>
+    <string name="cont_descr_play_and_pause_button">Play and pause button</string>
+    <string name="switch_theme">Switch theme</string>
+    <string name="label_list_views">List Views</string>
+    <string name="label_list_cities">List Cities</string>
+    <string name="label_list_regions">List Regions</string>
+    <string name="label_details_view">Details view</string>
+</resources>
