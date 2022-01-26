@@ -39,7 +39,6 @@ class ListRegionsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = DataBindingUtil.inflate(inflater, R.layout.list_regions_fragment, container, false)
-
         val onClickNav: (Int) -> Unit = { int ->
             Log.i(TAG, "ListRegionsFragment : findNavController :  $int")
             findNavController().navigate(
@@ -58,7 +57,6 @@ class ListRegionsFragment : Fragment() {
         adapter.listItemModels = listItemInput
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         binding.recyclerView.adapter = adapter
-
     }
 
     private fun setupUI() {
@@ -78,7 +76,7 @@ class ListRegionsFragment : Fragment() {
                     .catch {
                         Log.i(TAG, "ListRegionsFragment : .catch")
                         Snackbar.make(binding.root, "Loading data failed!", Snackbar.LENGTH_LONG)
-                             .setAction("Reload", null) // View.OnClickListener
+                             //.setAction("Reload", null) // View.OnClickListener
                             .show()
                     }.collect()
             }

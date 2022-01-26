@@ -5,15 +5,12 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.SearchView
-import android.widget.Toolbar
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import by.godevelopment.kroksample.R
 import by.godevelopment.kroksample.common.LANG_BY_KEY
@@ -39,7 +36,6 @@ class MainActivity : AppCompatActivity() {
         _navController = navHostFragment.navController
 
         val appBarConfiguration = AppBarConfiguration(navController.graph)
-//        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration)
         setupWithNavController(findViewById(R.id.krok_toolbar), navController, appBarConfiguration)
     }
 
@@ -60,7 +56,7 @@ class MainActivity : AppCompatActivity() {
             true
         }
         R.id.switch_theme -> {
-            // first check which theme is currently selected and apply a new theme based on the result.
+            Log.i(TAG, "onOptionsItemSelected: switch_theme")
             when (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
                 Configuration.UI_MODE_NIGHT_YES ->
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
@@ -76,11 +72,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.toolbar_menu, menu)
-
-//        val searchItem = menu?.findItem(R.id.action_search)
-//        val searchView = searchItem?.actionView as SearchView
-        // Configure the search info and add any event listeners...
-
         return super.onCreateOptionsMenu(menu)
     }
 

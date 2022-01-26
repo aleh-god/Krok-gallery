@@ -6,10 +6,7 @@ import by.godevelopment.kroksample.common.TAG
 import by.godevelopment.kroksample.data.datasources.krok.KrokData
 import by.godevelopment.kroksample.data.datasources.preferences.KrokPreferences
 import by.godevelopment.kroksample.domain.model.ListItemModel
-import by.godevelopment.kroksample.domain.model.RegionItem
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.asFlow
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 

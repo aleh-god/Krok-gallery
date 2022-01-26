@@ -1,4 +1,4 @@
-package by.godevelopment.kroksample.ui.listplaces
+package by.godevelopment.kroksample.ui.listviews
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -19,7 +19,7 @@ import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
 @HiltViewModel
-class ListPlacesViewModel @Inject constructor(
+class ListViewsViewModel @Inject constructor(
     private val getListViewsByIdCityUserCase: GetListViewsByIdCityUserCase,
     private val getCityNameByIdCityUserCase: GetCityNameByIdCityUserCase,
     private val stringHelper: StringHelper
@@ -38,23 +38,23 @@ class ListPlacesViewModel @Inject constructor(
         _navigationEvent.value = Event(key)
     }
 
-    // out flow
+    // out flow to fragment
     val out = idKey.flatMapLatest { key ->
-        Log.i(TAG, "ListPlacesViewModel out: key = $key")
+        Log.i(TAG, "ListViewsViewModel out: key = $key")
         getListViewsByIdCityUserCase(key, onClickNav)
     }
         .onStart {
-        Log.i(TAG, "ListPlacesViewModel out: .onStart")
+        Log.i(TAG, "ListViewsViewModel out: .onStart")
     }
         .map<List<ListItemModel>, Element<List<ListItemModel>>> { item ->
-            Log.i(TAG, "ListPlacesViewModel out: .map = ${item.size}")
+            Log.i(TAG, "ListViewsViewModel out: .map = ${item.size}")
             ItemElement(item) }
         .onCompletion {
-            Log.i(TAG, "ListPlacesViewModel out: .onCompletion")
+            Log.i(TAG, "ListViewsViewModel out: .onCompletion")
             emit(CompletedElement())
         }
         .catch { exception ->
-            Log.i(TAG, "ListPlacesViewModel out: .catch ${exception.message}")
+            Log.i(TAG, "ListViewsViewModel out: .catch ${exception.message}")
             emit(ErrorElement(exception))
         }
         .shareIn(viewModelScope, SharingStarted.Eagerly, 1)
@@ -64,7 +64,7 @@ class ListPlacesViewModel @Inject constructor(
         }
         .takeWhile { it is ItemElement }
         .map {
-            Log.i(TAG, "ListPlacesViewModel out: .map $it")
+            Log.i(TAG, "ListViewsViewModel out: .map $it")
             (it as ItemElement).item }
 
     val header = idKey.flatMapLatest {

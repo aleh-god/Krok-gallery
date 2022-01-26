@@ -6,14 +6,14 @@
     <data>
         <variable
             name="viewModel"
-            type="by.godevelopment.kroksample.ui.listplaces.ListPlacesViewModel" />
+            type="by.godevelopment.kroksample.ui.listviews.ListViewsViewModel" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.listplaces.ListPlacesFragment"
+        tools:context=".ui.listviews.ListViewsFragment"
         >
 
         <TextView

@@ -1,4 +1,4 @@
-package by.godevelopment.kroksample.ui.listplaces
+package by.godevelopment.kroksample.ui.listviews
 
 import android.os.Bundle
 import android.util.Log
@@ -11,38 +11,36 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.godevelopment.kroksample.R
 import by.godevelopment.kroksample.common.TAG
-import by.godevelopment.kroksample.databinding.ListPlacesFragmentBinding
+import by.godevelopment.kroksample.databinding.ListViewsFragmentBinding
 import by.godevelopment.kroksample.domain.adapters.KrokAdapter
 import by.godevelopment.kroksample.domain.model.ListItemModel
-import by.godevelopment.kroksample.ui.listcities.ListCitiesFragmentDirections
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class ListPlacesFragment : Fragment() {
+class ListViewsFragment : Fragment() {
 
     companion object {
-        fun newInstance() = ListPlacesFragment()
+        fun newInstance() = ListViewsFragment()
     }
 
-    private var _binding: ListPlacesFragmentBinding? = null
+    private var _binding: ListViewsFragmentBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: ListPlacesViewModel by viewModels()
+    private val viewModel: ListViewsViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = DataBindingUtil.inflate(inflater, R.layout.list_places_fragment, container, false)
-        val idCityArgs: ListPlacesFragmentArgs by navArgs()
+        _binding = DataBindingUtil.inflate(inflater, R.layout.list_views_fragment, container, false)
+        val idCityArgs: ListViewsFragmentArgs by navArgs()
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
         viewModel.idKey.value = idCityArgs.idKey
@@ -62,7 +60,7 @@ class ListPlacesFragment : Fragment() {
     private fun setupUI() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                Log.i(TAG, "ListPlacesFragment : Lifecycle.State.STARTED")
+                Log.i(TAG, "ListViewsFragment : Lifecycle.State.STARTED")
                 viewModel.out
                     .onStart {
                         binding.progressDownload.visibility = View.VISIBLE
@@ -82,18 +80,18 @@ class ListPlacesFragment : Fragment() {
     }
 
     private fun setupNavigation() {
-        viewModel.navigationEvent.observe(this) { event ->
+        viewModel.navigationEvent.observe(viewLifecycleOwner) { event ->
             event.get()?.let {
-                Log.i(TAG, "ListPlacesFragment findNavController : $it")
+                Log.i(TAG, "ListViewsFragment findNavController : $it")
                 findNavController().navigate(
-                    ListPlacesFragmentDirections.actionListPlacesPointToDetailsPoint(it)
+                    ListViewsFragmentDirections.actionListViewsPointToDetailsPoint(it)
                 )
             }
         }
     }
 
     override fun onDestroy() {
-        Log.i(TAG, "ListPlacesFragment : onDestroy()")
+        Log.i(TAG, "ListViewsFragment : onDestroy()")
         _binding = null
         super.onDestroy()
     }

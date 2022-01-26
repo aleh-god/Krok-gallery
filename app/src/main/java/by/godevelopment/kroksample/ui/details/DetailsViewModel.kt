@@ -86,7 +86,7 @@ class DetailsViewModel @Inject constructor(
                         header = stringHelper.getString(R.string.message_error),
                         headerText = stringHelper.getString(R.string.message_error_loading)
                         )
-                    }.collect() //asStateFlow(UiStateModel())
+                    }.collect()
         }
 
         viewModelScope.launch {
@@ -106,15 +106,9 @@ class DetailsViewModel @Inject constructor(
 
     fun onClickStop() {
         currentStateMedia = MediaPlayerStateModel()
-        Log.i(TAG, "onClickStop(): currentStateMedia $currentStateMedia")
         mediaHelper.stopMusic()
         playerIsOn.value = false
     }
-
-//    fun onStopMedia() {
-//        mediaHelper.stopMusic()
-//        playerIsOn.value = false
-//    }
 
     private fun <T> Flow<T>.asStateFlow(init: T) =
         stateIn(viewModelScope, SharingStarted.Lazily, init)

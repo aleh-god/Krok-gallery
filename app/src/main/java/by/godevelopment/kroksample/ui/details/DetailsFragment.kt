@@ -39,7 +39,7 @@ class DetailsFragment : Fragment() {
     }
 
     override fun onDestroy() {
-        Log.i(TAG, "ListRegionsFragment : onDestroy()")
+        Log.i(TAG, "DetailsFragment : onDestroy()")
         _binding = null
         super.onDestroy()
     }

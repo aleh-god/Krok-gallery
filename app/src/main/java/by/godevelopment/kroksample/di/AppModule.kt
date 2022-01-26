@@ -30,12 +30,6 @@ object AppModule {
     @Provides
     fun provideBaseUrl() : String = "https://krokapp.com/"
 
-//    @Provides
-//    @Singleton
-//    fun provideMoshi(): Moshi = Moshi.Builder()
-//        .add(KotlinJsonAdapterFactory())
-//        .build()
-
     @Provides
     @Singleton
     fun provideOkHttpClient() = OkHttpClient.Builder()
@@ -68,9 +62,8 @@ object AppModule {
     @Provides
     @Singleton
     fun provideKrokPreferences(
-        @ApplicationContext appContext: Context,
-        coroutineScope: CoroutineScope
-    ): KrokPreferences = KrokPreferences(appContext, coroutineScope)
+        @ApplicationContext appContext: Context
+    ): KrokPreferences = KrokPreferences(appContext)
 
     @Provides
     @Singleton

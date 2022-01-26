@@ -54,7 +54,6 @@ class ListCitiesFragment : Fragment() {
         adapter.listItemModels = listItemInput
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         binding.recyclerView.adapter = adapter
-
     }
 
     private fun setupUI() {
@@ -71,7 +70,7 @@ class ListCitiesFragment : Fragment() {
                     }
                     .catch {
                         Snackbar.make(binding.root, "Loading data failed!", Snackbar.LENGTH_LONG)
-                            .setAction("Reload", null) // View.OnClickListener
+                            //.setAction("Reload", null) // View.OnClickListener
                             .show()
                         binding.progressDownload.visibility = View.INVISIBLE
                     }.collect()
@@ -80,11 +79,11 @@ class ListCitiesFragment : Fragment() {
     }
 
     private fun setupNavigation() {
-        viewModel.navigationEvent.observe(this) { event ->
+        viewModel.navigationEvent.observe(viewLifecycleOwner) { event ->
             event.get()?.let {
                 Log.i(TAG, "ListCitiesFragment : findNavController : $it")
                 findNavController().navigate(
-                    ListCitiesFragmentDirections.actionListCitiesPointToListPlacesPoint(it)
+                    ListCitiesFragmentDirections.actionListCitiesPointToListViewsPoint(it)
                 )
             }
         }

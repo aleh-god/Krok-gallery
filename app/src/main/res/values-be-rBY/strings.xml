@@ -19,8 +19,8 @@
     <string name="cont_descr_play_and_pause_button">Кнопка прайгравання і паўзы</string>
     <string name="cont_descr_stop_button">Кнопка прыпынку</string>
     <string name="switch_theme">Пераключыце тэму</string>
-    <string name="label_list_places">Спіс месцаў</string>
     <string name="label_list_cities">Спіс гарадоў</string>
     <string name="label_list_regions">Спіс рэгіёнаў</string>
     <string name="label_details_view">Прагляд дэталяў</string>
+    <string name="label_list_views">Спіс месцаў</string>
 </resources>

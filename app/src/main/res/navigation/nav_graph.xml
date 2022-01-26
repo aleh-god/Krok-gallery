@@ -7,16 +7,16 @@
     app:startDestination="@id/listRegionsPoint">
 
     <fragment
-        android:id="@+id/listPlacesPoint"
-        android:name="by.godevelopment.kroksample.ui.listplaces.ListPlacesFragment"
-        android:label="@string/label_list_places"
-        tools:layout="@layout/list_places_fragment"
+        android:id="@+id/listViewsPoint"
+        android:name="by.godevelopment.kroksample.ui.listviews.ListViewsFragment"
+        android:label="@string/label_list_views"
+        tools:layout="@layout/list_views_fragment"
         >
         <action
-            android:id="@+id/action_listPlacesPoint_to_listCitiesPoint"
+            android:id="@+id/action_listViewsPoint_to_listCitiesPoint"
             app:destination="@id/listCitiesPoint" />
         <action
-            android:id="@+id/action_listPlacesPoint_to_detailsPoint"
+            android:id="@+id/action_listViewsPoint_to_detailsPoint"
             app:destination="@id/detailsPoint" />
         <argument
             android:name="id_key"
@@ -33,8 +33,8 @@
             android:id="@+id/action_listCitiesPoint_to_listRegionsPoint"
             app:destination="@id/listRegionsPoint" />
         <action
-            android:id="@+id/action_listCitiesPoint_to_listPlacesPoint"
-            app:destination="@id/listPlacesPoint" />
+            android:id="@+id/action_listCitiesPoint_to_listViewsPoint"
+            app:destination="@id/listViewsPoint" />
         <argument
             android:name="id_key"
             app:argType="integer" />
@@ -58,8 +58,8 @@
         tools:layout="@layout/details_fragment"
         >
         <action
-            android:id="@+id/action_detailsPoint_to_listPlacesPoint"
-            app:destination="@id/listPlacesPoint" />
+            android:id="@+id/action_detailsPoint_to_listViewsPoint"
+            app:destination="@id/listViewsPoint" />
         <argument
             android:name="id_key"
             app:argType="integer" />

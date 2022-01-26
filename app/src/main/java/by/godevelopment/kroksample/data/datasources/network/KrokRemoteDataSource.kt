@@ -31,24 +31,3 @@ class KrokRemoteDataSource @Inject constructor(
         } else throw InternetException()
     }.flowOn(ioDispatcher)
 }
-
-//    suspend fun getKrokPointList(krokPlace: Int): Result<List<KrokPoint>>
-//    = withContext(ioDispatcher) {
-//        Log.e(TAG, "getKrokPointList: start")
-//        try {
-//            val response = krokApi.getKrokPointList(krokPlace)
-//            if (response.isSuccessful && response.body() != null) {
-//                val result = response.body()!!
-//                return@withContext Result.Success<List<KrokPoint>>(result)
-//            } else return@withContext Result.Error("Result is null")
-//        } catch (e: IOException) {
-//            Log.e(TAG, "IOException, you might not have internet connection")
-//            return@withContext Result.Error("IOException, you might not have internet connection")
-//        } catch (e: HttpException) {
-//            Log.e(TAG, "HttpException, unexpected response")
-//            return@withContext Result.Error("HttpException, unexpected response")
-//        } catch (e: Exception) {
-//            Log.e(TAG, "AnonException, what happens wrong")
-//            return@withContext Result.Error("AnonException, what happens wrong")
-//        }
-//    }

@@ -60,7 +60,6 @@ class KrokAdapter : RecyclerView.Adapter<KrokAdapter.KrokViewHolder>() {
                 Log.i(TAG, "KrokAdapter onBindViewHolder: id = ${listItemModel.keyId}")
                 listItemModel.onClickNav.invoke(listItemModel.keyId)
             }
-            // executePendingBindings()
         }
     }
 }
