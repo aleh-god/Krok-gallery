@@ -35,28 +35,17 @@ class ListCitiesFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: ListCitiesViewModel by viewModels()
 
-    private val onClickNav: (Int) -> Unit = { int ->
-        Log.i(TAG, "ListCitiesFragment : findNavController :  $int")
-        findNavController().navigate(
-            ListCitiesFragmentDirections.actionListCitiesPointToListPlacesPoint(int)
-        )
-    }
-
-    private val idRegionArgs: ListCitiesFragmentArgs by navArgs()
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = DataBindingUtil.inflate(inflater, R.layout.list_cities_fragment, container, false)
+        val idRegionArgs: ListCitiesFragmentArgs by navArgs()
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
-        viewModel.onClickNav.value = onClickNav
-        Log.i(TAG, "ListCitiesFragment onCreateView: idKey = ${idRegionArgs.idKey}")
         viewModel.idKey.value = idRegionArgs.idKey
-
         setupUI()
-
+        setupNavigation()
         return binding.root
     }
 
@@ -90,7 +79,19 @@ class ListCitiesFragment : Fragment() {
         }
     }
 
+    private fun setupNavigation() {
+        viewModel.navigationEvent.observe(this) { event ->
+            event.get()?.let {
+                Log.i(TAG, "ListCitiesFragment : findNavController : $it")
+                findNavController().navigate(
+                    ListCitiesFragmentDirections.actionListCitiesPointToListPlacesPoint(it)
+                )
+            }
+        }
+    }
+
     override fun onDestroy() {
+        Log.i(TAG, "ListCitiesFragment : onDestroy()")
         _binding = null
         super.onDestroy()
     }

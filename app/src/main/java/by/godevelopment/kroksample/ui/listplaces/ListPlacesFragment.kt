@@ -20,6 +20,7 @@ import by.godevelopment.kroksample.common.TAG
 import by.godevelopment.kroksample.databinding.ListPlacesFragmentBinding
 import by.godevelopment.kroksample.domain.adapters.KrokAdapter
 import by.godevelopment.kroksample.domain.model.ListItemModel
+import by.godevelopment.kroksample.ui.listcities.ListCitiesFragmentDirections
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.*
@@ -36,27 +37,17 @@ class ListPlacesFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: ListPlacesViewModel by viewModels()
 
-    private val onClickNav: (Int) -> Unit = { int ->
-        Log.i(TAG, "findNavController :  $int")
-        findNavController().navigate(
-            ListPlacesFragmentDirections.actionListPlacesPointToDetailsPoint(int)
-        )
-    }
-
-    private val idCityArgs: ListPlacesFragmentArgs by navArgs()
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = DataBindingUtil.inflate(inflater, R.layout.list_places_fragment, container, false)
+        val idCityArgs: ListPlacesFragmentArgs by navArgs()
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
-        viewModel.onClickNav.value = onClickNav
         viewModel.idKey.value = idCityArgs.idKey
-
         setupUI()
-
+        setupNavigation()
         return binding.root
     }
 
@@ -90,7 +81,19 @@ class ListPlacesFragment : Fragment() {
         }
     }
 
+    private fun setupNavigation() {
+        viewModel.navigationEvent.observe(this) { event ->
+            event.get()?.let {
+                Log.i(TAG, "ListPlacesFragment findNavController : $it")
+                findNavController().navigate(
+                    ListPlacesFragmentDirections.actionListPlacesPointToDetailsPoint(it)
+                )
+            }
+        }
+    }
+
     override fun onDestroy() {
+        Log.i(TAG, "ListPlacesFragment : onDestroy()")
         _binding = null
         super.onDestroy()
     }

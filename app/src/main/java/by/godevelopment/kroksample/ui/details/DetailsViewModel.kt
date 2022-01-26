@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import by.godevelopment.kroksample.R
+import by.godevelopment.kroksample.common.EMPTY_INT_VALUE
 import by.godevelopment.kroksample.common.EMPTY_STRING_VALUE
 import by.godevelopment.kroksample.common.TAG
 import by.godevelopment.kroksample.domain.helpers.MediaHelper
@@ -24,7 +25,7 @@ class DetailsViewModel @Inject constructor(
     private val stringHelper: StringHelper
 ) : ViewModel() {
     // input flow
-    val navArgs = MutableStateFlow(-1)
+    val navArgs = MutableStateFlow(EMPTY_INT_VALUE)
 
     // model flow
     private var currentStateMedia = MediaPlayerStateModel()
@@ -79,7 +80,7 @@ class DetailsViewModel @Inject constructor(
                         mediaHelper.stopMusic()
                         playerIsOn.value = false
                     }
-                    .catch () { exception ->
+                    .catch { exception ->
                         Log.i(TAG, "DetailsViewModel: .catch ${exception.message}")
                         uiState.value = UiStateModel(
                         header = stringHelper.getString(R.string.message_error),
@@ -110,10 +111,10 @@ class DetailsViewModel @Inject constructor(
         playerIsOn.value = false
     }
 
-    fun onStopMedia() {
-        mediaHelper.stopMusic()
-        playerIsOn.value = false
-    }
+//    fun onStopMedia() {
+//        mediaHelper.stopMusic()
+//        playerIsOn.value = false
+//    }
 
     private fun <T> Flow<T>.asStateFlow(init: T) =
         stateIn(viewModelScope, SharingStarted.Lazily, init)

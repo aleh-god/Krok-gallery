@@ -12,7 +12,7 @@ class GetViewByIdUseCase @Inject constructor(
         .map { list ->
             Log.i(TAG, "GetViewByIdUseCase invoke list = ${list.size} param = $id")
             list.first { krok ->
-                krok.id == id
+                krok.id_point == id
             }
         }
 }

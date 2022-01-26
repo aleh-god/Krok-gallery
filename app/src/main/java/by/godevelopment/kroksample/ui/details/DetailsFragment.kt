@@ -25,13 +25,13 @@ class DetailsFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: DetailsViewModel by viewModels()
 
-    private val idViewArgs: DetailsFragmentArgs by navArgs()
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = DataBindingUtil.inflate(inflater, R.layout.details_fragment, container, false)
+
+        val idViewArgs: DetailsFragmentArgs by navArgs()
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
         viewModel.navArgs.value = idViewArgs.idKey

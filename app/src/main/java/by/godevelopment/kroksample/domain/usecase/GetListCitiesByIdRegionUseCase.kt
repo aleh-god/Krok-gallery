@@ -1,6 +1,7 @@
 package by.godevelopment.kroksample.domain.usecase
 
 import android.util.Log
+import by.godevelopment.kroksample.common.EMPTY_INT_VALUE
 import by.godevelopment.kroksample.common.EMPTY_STRING_VALUE
 import by.godevelopment.kroksample.common.TAG
 import by.godevelopment.kroksample.data.datasources.krok.KrokData
@@ -23,7 +24,7 @@ class GetListCitiesByIdRegionUseCase @Inject constructor(
                         }
                         .map { city ->
                             ListItemModel(
-                            city.id ?: -1,
+                            city.id ?: EMPTY_INT_VALUE,
                             city.logo ?: EMPTY_STRING_VALUE,
                             city.name ?: EMPTY_STRING_VALUE,
                             onClick

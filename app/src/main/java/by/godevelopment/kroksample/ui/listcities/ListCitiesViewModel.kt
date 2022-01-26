@@ -1,13 +1,12 @@
 package by.godevelopment.kroksample.ui.listcities
 
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import by.godevelopment.kroksample.R
-import by.godevelopment.kroksample.common.ApplicationException
-import by.godevelopment.kroksample.common.EMPTY_STRING_VALUE
-import by.godevelopment.kroksample.common.InternetException
-import by.godevelopment.kroksample.common.TAG
+import by.godevelopment.kroksample.common.*
 import by.godevelopment.kroksample.domain.helpers.StringHelper
 import by.godevelopment.kroksample.domain.model.*
 import by.godevelopment.kroksample.domain.usecase.GetListCitiesByIdRegionUseCase
@@ -23,13 +22,22 @@ class ListCitiesViewModel @Inject constructor(
     private val stringHelper: StringHelper
 ) : ViewModel() {
     // input flow
-    var onClickNav: MutableStateFlow<(Int) -> Unit> = MutableStateFlow { }
-    val idKey = MutableStateFlow(-1)
+    val idKey = MutableStateFlow(EMPTY_INT_VALUE)
+    var onClickNav: (Int) -> Unit = { key ->
+        startNavigation(key)
+    }
+
+    private val _navigationEvent: MutableLiveData<Event<Int>> = MutableLiveData(Event(null))
+    val navigationEvent: LiveData<Event<Int>> = _navigationEvent
+
+    private fun startNavigation(key: Int) {
+        _navigationEvent.value = Event(key)
+    }
 
     // out  flow
     val out = idKey.flatMapLatest { key ->
         Log.i(TAG, "ListCitiesViewModel out: key = $key")
-        getListCitiesByIdRegionUseCase(key, onClickNav.value) }
+        getListCitiesByIdRegionUseCase(key, onClickNav) }
         .onStart {
             Log.i(TAG, "ListCitiesViewModel out: .onStart")
         }
@@ -61,7 +69,6 @@ class ListCitiesViewModel @Inject constructor(
         Log.i(TAG, "ListViewModel: catch header")
         emit(stringHelper.getString(R.string.message_error_loading))
     }.asStateFlow(EMPTY_STRING_VALUE)
-
 
     private fun <T> Flow<T>.asStateFlow(init: T) =
         stateIn(viewModelScope, SharingStarted.Lazily, init)

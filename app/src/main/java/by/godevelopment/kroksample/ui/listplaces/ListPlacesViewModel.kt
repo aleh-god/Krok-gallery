@@ -1,10 +1,13 @@
 package by.godevelopment.kroksample.ui.listplaces
 
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import by.godevelopment.kroksample.R
 import by.godevelopment.kroksample.common.ApplicationException
+import by.godevelopment.kroksample.common.EMPTY_INT_VALUE
 import by.godevelopment.kroksample.common.EMPTY_STRING_VALUE
 import by.godevelopment.kroksample.common.TAG
 import by.godevelopment.kroksample.domain.helpers.StringHelper
@@ -22,13 +25,23 @@ class ListPlacesViewModel @Inject constructor(
     private val stringHelper: StringHelper
 ) : ViewModel() {
     // input flow
-    var onClickNav: MutableStateFlow<(Int) -> Unit> = MutableStateFlow { }
-    val idKey = MutableStateFlow(-1)
+    val idKey = MutableStateFlow(EMPTY_INT_VALUE)
+
+    var onClickNav: (Int) -> Unit = { key ->
+        startNavigation(key)
+    }
+
+    private val _navigationEvent: MutableLiveData<Event<Int>> = MutableLiveData(Event(null))
+    val navigationEvent: LiveData<Event<Int>> = _navigationEvent
+
+    private fun startNavigation(key: Int) {
+        _navigationEvent.value = Event(key)
+    }
 
     // out flow
     val out = idKey.flatMapLatest { key ->
         Log.i(TAG, "ListPlacesViewModel out: key = $key")
-        getListViewsByIdCityUserCase(key, onClickNav.value)
+        getListViewsByIdCityUserCase(key, onClickNav)
     }
         .onStart {
         Log.i(TAG, "ListPlacesViewModel out: .onStart")

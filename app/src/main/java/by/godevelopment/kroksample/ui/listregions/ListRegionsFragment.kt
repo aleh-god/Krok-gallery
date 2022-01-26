@@ -34,24 +34,22 @@ class ListRegionsFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: ListRegionsViewModel by viewModels()
 
-    private val onClickNav: (Int) -> Unit = { int ->
-        Log.i(TAG, "ListRegionsFragment : findNavController :  $int")
-        findNavController().navigate(
-            ListRegionsFragmentDirections.actionListRegionsPointToListCitiesPoint(int)
-        )
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = DataBindingUtil.inflate(inflater, R.layout.list_regions_fragment, container, false)
+
+        val onClickNav: (Int) -> Unit = { int ->
+            Log.i(TAG, "ListRegionsFragment : findNavController :  $int")
+            findNavController().navigate(
+                ListRegionsFragmentDirections.actionListRegionsPointToListCitiesPoint(int)
+            )
+        }
         viewModel.onClickNav.value = onClickNav
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
-
         setupUI()
-
         return binding.root
     }
 
