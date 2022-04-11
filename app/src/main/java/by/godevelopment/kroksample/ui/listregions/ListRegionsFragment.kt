@@ -1,7 +1,6 @@
 package by.godevelopment.kroksample.ui.listregions
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,13 +13,14 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.godevelopment.kroksample.R
-import by.godevelopment.kroksample.common.TAG
 import by.godevelopment.kroksample.databinding.ListRegionsFragmentBinding
 import by.godevelopment.kroksample.domain.adapters.KrokAdapter
-import by.godevelopment.kroksample.domain.model.ListItemModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -40,7 +40,6 @@ class ListRegionsFragment : Fragment() {
     ): View {
         _binding = DataBindingUtil.inflate(inflater, R.layout.list_regions_fragment, container, false)
         val onClickNav: (Int) -> Unit = { int ->
-            Log.i(TAG, "ListRegionsFragment : findNavController :  $int")
             findNavController().navigate(
                 ListRegionsFragmentDirections.actionListRegionsPointToListCitiesPoint(int)
             )
@@ -52,31 +51,22 @@ class ListRegionsFragment : Fragment() {
         return binding.root
     }
 
-    private fun setupAdapter(listItemInput: List<ListItemModel>) {
+    private fun setupUI() {
         val adapter = KrokAdapter()
-        adapter.listItemModels = listItemInput
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         binding.recyclerView.adapter = adapter
-    }
-
-    private fun setupUI() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                Log.i(TAG, "ListRegionsFragment : Lifecycle.State.STARTED")
                 viewModel.out
                     .onStart {
-                        Log.i(TAG, "ListRegionsFragment : .onStart")
                         binding.progressDownload.visibility = View.VISIBLE
                     }
                     .onEach {
-                        Log.i(TAG, "ListRegionsFragment : .onEach")
-                        setupAdapter(it)
+                        adapter.listItemModels = it
                         binding.progressDownload.visibility = View.INVISIBLE // View.GONE
                     }
                     .catch {
-                        Log.i(TAG, "ListRegionsFragment : .catch")
                         Snackbar.make(binding.root, "Loading data failed!", Snackbar.LENGTH_LONG)
-                             //.setAction("Reload", null) // View.OnClickListener
                             .show()
                     }.collect()
             }
@@ -84,7 +74,6 @@ class ListRegionsFragment : Fragment() {
     }
 
     override fun onDestroy() {
-        Log.i(TAG, "ListRegionsFragment : onDestroy()")
         _binding = null
         super.onDestroy()
     }

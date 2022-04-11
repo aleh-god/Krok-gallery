@@ -1,10 +1,8 @@
 package by.godevelopment.kroksample.ui.listregions
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import by.godevelopment.kroksample.common.EMPTY_STRING_VALUE
-import by.godevelopment.kroksample.common.TAG
 import by.godevelopment.kroksample.data.datasources.krok.KrokData
 import by.godevelopment.kroksample.data.datasources.preferences.KrokPreferences
 import by.godevelopment.kroksample.domain.usecase.GetRegionListUseCase
@@ -18,14 +16,13 @@ class ListRegionsViewModel @Inject constructor(
     krokPreferences: KrokPreferences
 ) : ViewModel() {
 
-    val header = krokPreferences.stateSharedPreferences.map {
-        KrokData.header[it] ?: EMPTY_STRING_VALUE
-    }.stateIn(viewModelScope, SharingStarted.Lazily, EMPTY_STRING_VALUE)
+    val header = krokPreferences.stateSharedPreferences
+        .map { KrokData.header[it] ?: EMPTY_STRING_VALUE }
+        .stateIn(viewModelScope, SharingStarted.Lazily, EMPTY_STRING_VALUE)
 
     var onClickNav: MutableStateFlow<(Int) -> Unit> = MutableStateFlow { }
 
-    val out = onClickNav.flatMapLatest {
-        Log.i(TAG, "ListRegionsViewModel: onClickNav.flatMapLatest")
-        getRegionListUseCase(it)
-    }.shareIn(viewModelScope, SharingStarted.Eagerly, replay = 1)
+    val out = onClickNav
+        .flatMapLatest { getRegionListUseCase(it) }
+        .shareIn(viewModelScope, SharingStarted.Eagerly, replay = 1)
 }
