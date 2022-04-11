@@ -24,33 +24,23 @@ class ListViewsViewModel @Inject constructor(
     private val getCityNameByIdCityUserCase: GetCityNameByIdCityUserCase,
     private val stringHelper: StringHelper
 ) : ViewModel() {
-    // input flow
+
     val idKey = MutableStateFlow(EMPTY_INT_VALUE)
 
-    var onClickNav: (Int) -> Unit = { key ->
-        startNavigation(key)
-    }
+    var onClickNav: (Int) -> Unit = { key -> startNavigation(key) }
 
     private val _navigationEvent: MutableLiveData<Event<Int>> = MutableLiveData(Event(null))
+
     val navigationEvent: LiveData<Event<Int>> = _navigationEvent
 
-    private fun startNavigation(key: Int) {
-        _navigationEvent.value = Event(key)
-    }
+    private fun startNavigation(key: Int) { _navigationEvent.value = Event(key) }
 
-    // out flow to fragment
-    val out = idKey.flatMapLatest { key ->
-        Log.i(TAG, "ListViewsViewModel out: key = $key")
-        getListViewsByIdCityUserCase(key, onClickNav)
-    }
-        .onStart {
-        Log.i(TAG, "ListViewsViewModel out: .onStart")
-    }
+    val out = idKey
+        .flatMapLatest { key -> getListViewsByIdCityUserCase(key, onClickNav) }
+        .onStart { Log.i(TAG, "ListViewsViewModel out: .onStart") }
         .map<List<ListItemModel>, Element<List<ListItemModel>>> { item ->
-            Log.i(TAG, "ListViewsViewModel out: .map = ${item.size}")
             ItemElement(item) }
         .onCompletion {
-            Log.i(TAG, "ListViewsViewModel out: .onCompletion")
             emit(CompletedElement())
         }
         .catch { exception ->
@@ -64,15 +54,11 @@ class ListViewsViewModel @Inject constructor(
         }
         .takeWhile { it is ItemElement }
         .map {
-            Log.i(TAG, "ListViewsViewModel out: .map $it")
             (it as ItemElement).item }
 
-    val header = idKey.flatMapLatest {
-        getCityNameByIdCityUserCase(it)
-    }.catch {
-        Log.i(TAG, "ListViewModel: catch header")
-        emit(stringHelper.getString(R.string.message_error_loading))
-    }.asStateFlow(EMPTY_STRING_VALUE)
+    val header = idKey.flatMapLatest { getCityNameByIdCityUserCase(it) }
+        .catch { emit(stringHelper.getString(R.string.message_error_loading)) }
+        .asStateFlow(EMPTY_STRING_VALUE)
 
     private fun <T> Flow<T>.asStateFlow(init: T) =
         stateIn(viewModelScope, SharingStarted.Lazily, init)

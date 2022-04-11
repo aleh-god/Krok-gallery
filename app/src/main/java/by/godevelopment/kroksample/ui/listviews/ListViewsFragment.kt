@@ -1,7 +1,6 @@
 package by.godevelopment.kroksample.ui.listviews
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,13 +14,14 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.godevelopment.kroksample.R
-import by.godevelopment.kroksample.common.TAG
 import by.godevelopment.kroksample.databinding.ListViewsFragmentBinding
 import by.godevelopment.kroksample.domain.adapters.KrokAdapter
-import by.godevelopment.kroksample.domain.model.ListItemModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -49,29 +49,23 @@ class ListViewsFragment : Fragment() {
         return binding.root
     }
 
-    private fun setupAdapter(listItemInput: List<ListItemModel>) {
+    private fun setupUI() {
         val adapter = KrokAdapter()
-        adapter.listItemModels = listItemInput
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         binding.recyclerView.adapter = adapter
-
-    }
-
-    private fun setupUI() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                Log.i(TAG, "ListViewsFragment : Lifecycle.State.STARTED")
                 viewModel.out
                     .onStart {
                         binding.progressDownload.visibility = View.VISIBLE
                     }
                     .onEach {
-                        setupAdapter(it)
+                        adapter.listItemModels = it
                         binding.progressDownload.visibility = View.INVISIBLE
                     }
                     .catch {
                         Snackbar.make(binding.root, "Loading data failed!", Snackbar.LENGTH_LONG)
-                            .setAction("Reload", null) // View.OnClickListener
+                            .setAction("Reload", null)
                             .show()
                         binding.progressDownload.visibility = View.INVISIBLE
                     }.collect()
@@ -82,7 +76,6 @@ class ListViewsFragment : Fragment() {
     private fun setupNavigation() {
         viewModel.navigationEvent.observe(viewLifecycleOwner) { event ->
             event.get()?.let {
-                Log.i(TAG, "ListViewsFragment findNavController : $it")
                 findNavController().navigate(
                     ListViewsFragmentDirections.actionListViewsPointToDetailsPoint(it)
                 )
@@ -91,7 +84,6 @@ class ListViewsFragment : Fragment() {
     }
 
     override fun onDestroy() {
-        Log.i(TAG, "ListViewsFragment : onDestroy()")
         _binding = null
         super.onDestroy()
     }

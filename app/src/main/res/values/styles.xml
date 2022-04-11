@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Widget.Krok.Toolbar" parent="Widget.AppCompat.Toolbar">
+    <style name="Widget.Krok.Toolbar" parent="Widget.MaterialComponents.Toolbar">
         <item name="titleTextAppearance">@style/TextAppearance.Krok.Toolbar</item>
         <item name="android:background">?attr/colorPrimary</item>
         <item name="android:elevation">@dimen/elevation</item>
