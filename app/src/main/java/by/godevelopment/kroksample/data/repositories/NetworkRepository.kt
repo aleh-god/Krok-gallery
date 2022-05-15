@@ -17,14 +17,13 @@ import javax.inject.Inject
 class NetworkRepository @Inject constructor(
     private val krokRemoteDataSource: KrokRemoteDataSource,
     private val externalScope: CoroutineScope
-    ) {
+)
+{
     fun getAllCities(): Flow<List<KrokCity>> = krokRemoteDataSource.getAllCities
         .map<List<KrokCity>, Element<List<KrokCity>>> {
-            Log.i(TAG, "NetworkRepository getAllCities: list - ${it.size}")
             ItemElement(it)
         }
         .onCompletion {
-            Log.i(TAG, "NetworkRepository getAllCities.onCompletion")
             emit(CompletedElement())
         }
         .catch { exception ->
@@ -42,16 +41,13 @@ class NetworkRepository @Inject constructor(
         }
         .takeWhile { it is ItemElement }
         .map {
-            Log.i(TAG, "NetworkRepository getAllCities.map $it")
             (it as ItemElement).item }
 
     fun getAllViews(): Flow<List<KrokView>> = krokRemoteDataSource.getAllViews
         .map<List<KrokView>, Element<List<KrokView>>> {
-            Log.i(TAG, "NetworkRepository getAllViews: list - ${it.size}")
             ItemElement(it)
         }
         .onCompletion {
-            Log.i(TAG, "NetworkRepository getAllViews.onCompletion")
             emit(CompletedElement())
         }
         .catch { exception ->
@@ -69,6 +65,5 @@ class NetworkRepository @Inject constructor(
         }
         .takeWhile { it is ItemElement }
         .map {
-            Log.i(TAG, "NetworkRepository getAllViews.map $it")
             (it as ItemElement).item }
 }

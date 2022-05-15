@@ -15,7 +15,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 
 class KrokAdapter : RecyclerView.Adapter<KrokAdapter.KrokViewHolder>() {
 
-    inner class KrokViewHolder(val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root)
+    class KrokViewHolder(val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root)
 
     private val diffCallback = object : DiffUtil.ItemCallback<ListItemModel>() {
         override fun areItemsTheSame(oldItem: ListItemModel, newItem: ListItemModel): Boolean {

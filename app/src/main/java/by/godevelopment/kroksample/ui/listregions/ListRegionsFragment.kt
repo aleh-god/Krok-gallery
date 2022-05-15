@@ -38,7 +38,12 @@ class ListRegionsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = DataBindingUtil.inflate(inflater, R.layout.list_regions_fragment, container, false)
+        _binding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.list_regions_fragment,
+            container,
+            false
+        )
         val onClickNav: (Int) -> Unit = { int ->
             findNavController().navigate(
                 ListRegionsFragmentDirections.actionListRegionsPointToListCitiesPoint(int)
@@ -66,7 +71,10 @@ class ListRegionsFragment : Fragment() {
                         binding.progressDownload.visibility = View.INVISIBLE // View.GONE
                     }
                     .catch {
-                        Snackbar.make(binding.root, "Loading data failed!", Snackbar.LENGTH_LONG)
+                        Snackbar.make(
+                            binding.root,
+                            getString(R.string.message_error_loading),
+                            Snackbar.LENGTH_LONG)
                             .show()
                     }.collect()
             }

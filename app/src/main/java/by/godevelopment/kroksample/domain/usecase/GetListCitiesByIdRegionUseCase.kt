@@ -1,9 +1,7 @@
 package by.godevelopment.kroksample.domain.usecase
 
-import android.util.Log
 import by.godevelopment.kroksample.common.EMPTY_INT_VALUE
 import by.godevelopment.kroksample.common.EMPTY_STRING_VALUE
-import by.godevelopment.kroksample.common.TAG
 import by.godevelopment.kroksample.data.datasources.krok.KrokData
 import by.godevelopment.kroksample.domain.model.ListItemModel
 import kotlinx.coroutines.flow.Flow
@@ -17,13 +15,13 @@ class GetListCitiesByIdRegionUseCase @Inject constructor(
         changeLanguageInCitiesFlowUserCase()
             .map { list ->
                 val region = KrokData.regionStringKey[param] ?: EMPTY_STRING_VALUE
-                Log.i(TAG, "GetListCitiesByIdRegionUseCase invoke: $param = $region")
-                    list
-                        .filter {
-                            it.region == region
-                        }
-                        .map { city ->
-                            ListItemModel(
+                list
+                    .filter { it.region == region }
+                    .filter {
+                        it.name != EMPTY_STRING_VALUE
+                    }
+                    .map { city ->
+                        ListItemModel(
                             city.id ?: EMPTY_INT_VALUE,
                             city.logo ?: EMPTY_STRING_VALUE,
                             city.name ?: EMPTY_STRING_VALUE,
