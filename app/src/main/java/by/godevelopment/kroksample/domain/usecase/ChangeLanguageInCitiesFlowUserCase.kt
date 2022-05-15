@@ -1,7 +1,5 @@
 package by.godevelopment.kroksample.domain.usecase
 
-import android.util.Log
-import by.godevelopment.kroksample.common.TAG
 import by.godevelopment.kroksample.data.datasources.network.entity.KrokCity
 import by.godevelopment.kroksample.data.datasources.preferences.KrokPreferences
 import by.godevelopment.kroksample.data.repositories.NetworkRepository
@@ -17,7 +15,6 @@ class ChangeLanguageInCitiesFlowUserCase @Inject constructor(
         networkRepository.getAllCities(),
         krokPreferences.stateSharedPreferences
     ) { list: List<KrokCity>, langId ->
-        Log.i(TAG, "ChangeLanguageInCitiesFlowUserCase: list - ${list.size} lang = $langId")
         list.filter {
             it.lang == langId
         }

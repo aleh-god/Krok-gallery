@@ -22,4 +22,5 @@
     <string name="label_list_cities">List Cities</string>
     <string name="label_list_regions">List Regions</string>
     <string name="label_details_view">Details view</string>
+    <string name="snackbar_action_text">Reload</string>
 </resources>

@@ -23,4 +23,5 @@
     <string name="label_list_regions">Список регионов</string>
     <string name="label_details_view">Просмотр сведений</string>
     <string name="label_list_views">Список мест</string>
+    <string name="snackbar_action_text">Перезагрузить</string>
 </resources>

@@ -1,7 +1,5 @@
 package by.godevelopment.kroksample.domain.usecase
 
-import android.util.Log
-import by.godevelopment.kroksample.common.TAG
 import by.godevelopment.kroksample.data.datasources.network.entity.KrokView
 import by.godevelopment.kroksample.data.datasources.preferences.KrokPreferences
 import by.godevelopment.kroksample.data.repositories.NetworkRepository
@@ -17,11 +15,8 @@ class ChangeLanguageInViewsFlowUserCase @Inject constructor(
         networkRepository.getAllViews(),
         krokPreferences.stateSharedPreferences
     ) { list: List<KrokView>, langId ->
-        Log.i(TAG, "ChangeLanguageInViewsFlowUserCase: list - ${list.size} lang = $langId")
-        val result = list.filter {
+        list.filter {
             it.lang == langId
         }
-        Log.i(TAG, "ChangeLanguageInViewsFlowUserCase: FILTER list - ${result.size} lang = $langId")
-        result
     }
 }

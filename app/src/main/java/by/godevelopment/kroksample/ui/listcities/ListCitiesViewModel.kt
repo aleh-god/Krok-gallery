@@ -35,11 +35,12 @@ class ListCitiesViewModel @Inject constructor(
 
     private fun startNavigation(key: Int) { _navigationEvent.value = Event(key) }
 
-    val out = idKey
+    val listCitiesShare = idKey
         .flatMapLatest { key -> getListCitiesByIdRegionUseCase(key, onClickNav) }
         .onStart { Log.i(TAG, "ListCitiesViewModel out: .onStart") }
         .map<List<ListItemModel>, Element<List<ListItemModel>>> { item ->
-            ItemElement(item) }
+            ItemElement(item)
+        }
         .onCompletion { emit(CompletedElement()) }
         .catch { exception ->
             Log.i(TAG, "ListCitiesViewModel out: .catch ${exception.message}")

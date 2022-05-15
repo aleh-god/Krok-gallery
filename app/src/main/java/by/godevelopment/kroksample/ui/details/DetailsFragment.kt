@@ -27,7 +27,12 @@ class DetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = DataBindingUtil.inflate(inflater, R.layout.details_fragment, container, false)
+        _binding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.details_fragment,
+            container,
+            false
+        )
 
         val idViewArgs: DetailsFragmentArgs by navArgs()
         binding.lifecycleOwner = this

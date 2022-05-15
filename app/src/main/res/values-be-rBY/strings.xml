@@ -23,4 +23,5 @@
     <string name="label_list_regions">Спіс рэгіёнаў</string>
     <string name="label_details_view">Прагляд дэталяў</string>
     <string name="label_list_views">Спіс месцаў</string>
+    <string name="snackbar_action_text">Перазагрузіць</string>
 </resources>

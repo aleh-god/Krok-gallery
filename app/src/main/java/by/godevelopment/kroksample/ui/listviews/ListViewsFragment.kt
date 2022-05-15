@@ -39,7 +39,12 @@ class ListViewsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = DataBindingUtil.inflate(inflater, R.layout.list_views_fragment, container, false)
+        _binding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.list_views_fragment,
+            container,
+            false
+        )
         val idCityArgs: ListViewsFragmentArgs by navArgs()
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
@@ -64,8 +69,12 @@ class ListViewsFragment : Fragment() {
                         binding.progressDownload.visibility = View.INVISIBLE
                     }
                     .catch {
-                        Snackbar.make(binding.root, "Loading data failed!", Snackbar.LENGTH_LONG)
-                            .setAction("Reload", null)
+                        Snackbar.make(
+                            binding.root,
+                            getString(R.string.message_error_loading),
+                            Snackbar.LENGTH_LONG
+                        )
+                            .setAction(getString(R.string.snackbar_action_text), null)
                             .show()
                         binding.progressDownload.visibility = View.INVISIBLE
                     }.collect()

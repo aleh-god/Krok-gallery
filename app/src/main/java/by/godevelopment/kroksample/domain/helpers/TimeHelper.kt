@@ -1,6 +1,5 @@
 package by.godevelopment.kroksample.domain.helpers
 
-import by.godevelopment.kroksample.common.TICK_INTERVAL_MS
 import by.godevelopment.kroksample.di.DefaultDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.delay
@@ -17,4 +16,8 @@ class TimeHelper @Inject constructor(
             delay(TICK_INTERVAL_MS)
         }
     }.flowOn(defaultDispatcher)
+
+    companion object {
+        const val TICK_INTERVAL_MS = 1000L
+    }
 }

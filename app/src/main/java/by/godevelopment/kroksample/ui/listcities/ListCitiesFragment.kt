@@ -40,7 +40,12 @@ class ListCitiesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = DataBindingUtil.inflate(inflater, R.layout.list_cities_fragment, container, false)
+        _binding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.list_cities_fragment,
+            container,
+            false
+        )
         val idRegionArgs: ListCitiesFragmentArgs by navArgs()
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
@@ -60,7 +65,7 @@ class ListCitiesFragment : Fragment() {
     private fun setupUI() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.out
+                viewModel.listCitiesShare
                     .onStart {
                         binding.progressDownload.visibility = View.VISIBLE
                     }
@@ -69,7 +74,11 @@ class ListCitiesFragment : Fragment() {
                         binding.progressDownload.visibility = View.INVISIBLE
                     }
                     .catch {
-                        Snackbar.make(binding.root, "Loading data failed!", Snackbar.LENGTH_LONG)
+                        Snackbar.make(
+                            binding.root,
+                            getString(R.string.message_error_loading),
+                            Snackbar.LENGTH_LONG
+                        )
                             .show()
                         binding.progressDownload.visibility = View.INVISIBLE
                     }.collect()

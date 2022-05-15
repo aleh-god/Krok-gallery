@@ -36,7 +36,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/header_list"
             app:layout_constraintBottom_toBottomOf="parent"
-            style="@style/Widget.Krok.Recyclerview"
             tools:listitem="@layout/list_item"
             />
 
@@ -48,7 +47,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            style="@style/Widget.Krok.ProgressBar"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
