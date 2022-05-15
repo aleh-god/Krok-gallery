@@ -48,6 +48,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.lang_by -> {
             mainViewModel.setLangPreference(LANG_BY_KEY)
+
             true
         }
         R.id.lang_eng -> {
