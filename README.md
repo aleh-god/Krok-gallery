@@ -13,4 +13,4 @@ Technologies used:
 7. Retrofit
 8. Material Design
 
-<img alt="demo" src="https://github.com/aleh-god/KrokSample/blob/master/demo.gif" />
+<img alt="demo" src="https://github.com/aleh-god/KrokSample/blob/main/demo.gif" />
