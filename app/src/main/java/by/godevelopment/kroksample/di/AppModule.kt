@@ -31,7 +31,6 @@ object AppModule {
     fun provideBaseUrl() : String = "https://krokapp.com/"
 
     @Provides
-    @Singleton
     fun provideOkHttpClient() = OkHttpClient.Builder()
         .addInterceptor(
             HttpLoggingInterceptor().apply { setLevel(HttpLoggingInterceptor.Level.BODY) }
@@ -39,7 +38,6 @@ object AppModule {
         .build()
 
     @Provides
-    @Singleton
     fun provideRetrofit(BASE_URL : String,
                         okHttpClient: OkHttpClient
     ) : Retrofit = Retrofit.Builder()
@@ -54,21 +52,8 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideKrokRemoteDataSource(
-        krokApi: KrokApi,
-        coroutineDispatcher: CoroutineDispatcher
-    ): KrokRemoteDataSource = KrokRemoteDataSource(krokApi, coroutineDispatcher)
-
-    @Provides
-    @Singleton
     fun provideKrokPreferences(
         @ApplicationContext appContext: Context
     ): KrokPreferences = KrokPreferences(appContext)
-
-    @Provides
-    @Singleton
-    fun provideNetworkRepository(
-        krokRemoteDataSource: KrokRemoteDataSource,
-        externalScope: CoroutineScope
-    ): NetworkRepository = NetworkRepository(krokRemoteDataSource, externalScope)
 }
+
