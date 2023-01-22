@@ -50,9 +50,13 @@ class ListCitiesFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
         viewModel.idKey.value = idRegionArgs.idKey
-        setupUI()
         setupNavigation()
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupUI()
     }
 
     private fun setupAdapter(listItemInput: List<ListItemModel>) {
@@ -96,8 +100,8 @@ class ListCitiesFragment : Fragment() {
         }
     }
 
-    override fun onDestroy() {
+    override fun onDestroyView() {
         _binding = null
-        super.onDestroy()
+        super.onDestroyView()
     }
 }

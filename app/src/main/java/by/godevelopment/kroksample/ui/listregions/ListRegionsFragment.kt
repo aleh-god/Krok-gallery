@@ -52,8 +52,12 @@ class ListRegionsFragment : Fragment() {
         viewModel.onClickNav.value = onClickNav
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
-        setupUI()
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupUI()
     }
 
     private fun setupUI() {
@@ -81,8 +85,8 @@ class ListRegionsFragment : Fragment() {
         }
     }
 
-    override fun onDestroy() {
+    override fun onDestroyView() {
         _binding = null
-        super.onDestroy()
+        super.onDestroyView()
     }
 }
